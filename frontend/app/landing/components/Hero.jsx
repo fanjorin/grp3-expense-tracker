@@ -1,3 +1,5 @@
+import FeatureCards from "./FeatureCards";
+
 export default function Hero() {
   return (
     <section className="flex items-center justify-between px-10 py-20">
@@ -47,6 +49,9 @@ export default function Hero() {
         </div>
 
       </div>
+
+      {/* Right Side — Feature Cards */}
+      <FeatureCards />
 
     </section>
   );
