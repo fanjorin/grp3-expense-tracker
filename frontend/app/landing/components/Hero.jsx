@@ -2,7 +2,7 @@ import FeatureCards from "./FeatureCards";
 
 export default function Hero() {
   return (
-    <section className="flex items-center justify-between px-10 py-20">
+    <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 py-16 md:py-20 gap-10">
 
       {/* Left Side */}
       <div className="max-w-lg">
@@ -13,20 +13,20 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-5xl font-extrabold text-gray-900 leading-tight mb-6">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
           Take Control of <br />
           Your Money — <br />
           Without the Stress
         </h1>
 
         {/* Subtext */}
-        <p className="text-gray-500 text-lg mb-8">
-          Track spending, set budgets, and understand <br />
+        <p className="text-gray-500 text-base md:text-lg mb-8">
+          Track spending, set budgets, and understand
           where your money actually goes.
         </p>
 
         {/* Buttons */}
-        <div className="flex items-center gap-4 mb-10">
+        <div className="flex flex-wrap items-center gap-4 mb-10">
           <a href="#" className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700">
             Start Free →
           </a>
