@@ -1,10 +1,19 @@
-const expenses = [
-  { id: 1, category: "Food", icon: "🍔", amount: 2500, date: "Today" },
-  { id: 2, category: "Transport", icon: "🚌", amount: 1200, date: "Yesterday" },
-  { id: 3, category: "Bills", icon: "💡", amount: 5000, date: "Apr 10" },
-];
+"use client";
+import { useEffect, useState } from "react";
+import { transactionAPI } from "../../services/api";
 
 export default function ExpenseList() {
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    transactionAPI.getAll().then(setExpenses);
+  }, []);
+
+  const handleDelete = async (id) => {
+    await transactionAPI.delete(id);
+    setExpenses((prev) => prev.filter((e) => e.id !== id));
+  };
+
   return (
     <div className="mx-8 mt-6 mb-8 bg-white rounded-xl p-4 shadow-sm">
 
@@ -31,29 +40,24 @@ export default function ExpenseList() {
 
               {/* Category */}
               <td className="py-3 flex items-center gap-2">
-                <span>{expense.icon}</span>
                 <span>{expense.category}</span>
               </td>
 
               {/* Amount */}
               <td className="py-3 text-gray-700">
-                {expense.amount.toLocaleString()}
+                ₦{expense.amount.toLocaleString()}
               </td>
 
               {/* Date */}
               <td className="py-3 text-gray-500">
-                {expense.date}
+                {new Date(expense.date).toLocaleDateString()}
               </td>
 
               {/* Actions */}
               <td className="py-3">
                 <div className="flex items-center gap-3">
-                  {/* Edit Button */}
-                  <button className="text-blue-500 hover:text-blue-700">
-                    ✏️
-                  </button>
-                  {/* Delete Button */}
-                  <button className="text-red-400 hover:text-red-600">
+                  <button className="text-red-400 hover:text-red-600"
+                    onClick={() => handleDelete(expense.id)}>
                     🗑️
                   </button>
                 </div>
