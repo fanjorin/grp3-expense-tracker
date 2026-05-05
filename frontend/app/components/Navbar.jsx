@@ -4,7 +4,7 @@ export default function Navbar() {
       
       {/* Logo */}
       <div className="flex items-center gap-2 text-blue-600 font-bold text-xl">
-        💰 Expense Tracker
+        Expense Tracker
       </div>
 
       {/* Nav Links */}
