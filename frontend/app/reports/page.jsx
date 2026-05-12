@@ -6,6 +6,7 @@ import SpendingByCategory from "./components/SpendingByCategory";
 import SpendingOverTime from "./components/SpendingOverTime";
 import TopCategories from "./components/TopCategories";
 import SummaryPanel from "./components/SummaryPanel";
+import RecentTransactions from "./components/RecentTransactions";
 
 export default function ReportsPage() {
   return (
@@ -36,7 +37,7 @@ export default function ReportsPage() {
         {/* Bottom Row */}
         <div className="grid grid-cols-3 gap-4 mt-4">
           <div className="col-span-2">
-            {/* Recent Transactions - coming in Commit 5 */}
+            <RecentTransactions />
           </div>
           <div className="col-span-1">
             <SummaryPanel />
