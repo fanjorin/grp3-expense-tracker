@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: expense_dev
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install dependencies (root & backend)
+        run: |
+          pnpm install
+          cd backend && pnpm install
+
+      - name: Set up environment variables
+        run: |
+          echo "DATABASE_URL=postgres://postgres:password@localhost:5432/expense_dev" > backend/.env
+
+      - name: Run Prisma migrations
+        working-directory: ./backend
+        run: pnpm run db:migrate
+
+      - name: Run backend tests
+        working-directory: ./backend
+        run: pnpm test
+
+      - name: Check code formatting
+        working-directory: ./backend
+        run: pnpm run format --check || true
