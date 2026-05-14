@@ -2,6 +2,7 @@ import Sidebar from "./components/Sidebar";
 import SettingsHeader from "./components/SettingsHeader";
 import SettingsPanel from "./components/SettingsPanel";
 import ProfileSection from "./components/ProfileSection";
+import PreferencesSection from "./components/PreferencesSection";
 
 export default function SettingsPage() {
   return (
@@ -25,6 +26,7 @@ export default function SettingsPage() {
           {/* Right Content */}
           <div className="flex-1">
             <ProfileSection />
+            <PreferencesSection />
           </div>
 
         </div>
