@@ -1,6 +1,7 @@
 import Sidebar from "./components/Sidebar";
 import SettingsHeader from "./components/SettingsHeader";
 import SettingsPanel from "./components/SettingsPanel";
+import ProfileSection from "./components/ProfileSection";
 
 export default function SettingsPage() {
   return (
@@ -23,7 +24,7 @@ export default function SettingsPage() {
 
           {/* Right Content */}
           <div className="flex-1">
-            {/* Content coming in next commits */}
+            <ProfileSection />
           </div>
 
         </div>
