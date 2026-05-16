@@ -5,7 +5,7 @@ import routes from "./routes";
 
 const app: Express = express();
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "http://localhost:3001" }));
 app.use(express.json());
 app.use(morgan("tiny"));
 
