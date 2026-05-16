@@ -1,4 +1,7 @@
+"use client";
+
 import React from 'react';
+import Link from 'next/link';
 
 export default function SignUpPage() {
   return (
@@ -83,7 +86,7 @@ export default function SignUpPage() {
           
           {/* Navigation Tabs (Log In / Sign Up switching display) */}
           <div className="flex gap-6 mb-10 border-b border-slate-100 text-sm font-medium">
-            <button type="button" className="pb-3 text-slate-400 hover:text-slate-600 transition">Log in</button>
+            <Link href="/login" className="pb-3 text-slate-400 hover:text-slate-600 transition">Log in</Link>
             <button type="button" className="pb-3 text-[#0052CC] border-b-2 border-[#0052CC] font-semibold">Sign up</button>
           </div>
 
@@ -97,25 +100,25 @@ export default function SignUpPage() {
             {/* Dual Column Row for Names */}
             <div className="flex gap-4">
               <div className="flex-1">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">First Name</label>
-                <input type="text" placeholder="Pascal" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+               <label htmlFor="firstName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">First Name</label>
+               <input type="text" name="firstName" id="firstName" placeholder="Pascal" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
               </div>
               <div className="flex-1">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Last Name</label>
-                <input type="text" placeholder="Nwachukwu" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+                <label htmlFor="lastName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Last Name</label>
+                <input type="text" name="lastName" id="lastName" placeholder="Nwachukwu" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
               </div>
             </div>
 
             {/* Email Address Input */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email address</label>
-              <input type="email" placeholder="you@gmail.com" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email address</label>
+              <input type="email" name="email" id="email" placeholder="you@gmail.com" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
             </div>
 
             {/* Phone Number Input */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone number</label>
-              <input type="text" placeholder="+234 000 000 000" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+              <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone number</label>
+              <input type="tel" name="phone" id="phone" placeholder="+234 000 000 000" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
             </div>
 
             {/* Decorative Content Divider */}
@@ -127,8 +130,12 @@ export default function SignUpPage() {
 
             {/* Third-Party Authentication: Google Federated Sign Up Button */}
             <button type="button" className="w-full flex items-center justify-center gap-2.5 p-3.5 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50 active:bg-slate-100 transition">
-              <img src="https://www.google.com/favicon.ico" alt="google logo" className="w-4 h-4" />
-              Sign up with Google
+              <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
+  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+</svg>
             </button>
 
             {/* Form Submission Confirmation Action */}
@@ -139,8 +146,8 @@ export default function SignUpPage() {
 
           {/* Core Footer Link Context */}
           <p className="text-center mt-8 text-sm text-slate-500">
-            Already have an account? <span className="text-[#0052CC] font-medium hover:underline cursor-pointer">Sign in</span>
-          </p>
+  Already have an account? <Link href="/login" className="text-[#0052CC] font-medium hover:underline">Sign in</Link>
+</p>
         </div>
       </div>
     </div>
