@@ -2,6 +2,7 @@ import Sidebar from "./components/Sidebar";
 import AddExpenseHeader from "./components/AddExpenseHeader";
 import ExpenseForm from "./components/ExpenseForm";
 import ReceiptUpload from "./components/ReceiptUpload";
+import ExpenseSummary from "./components/ExpenseSummary";
 
 export default function AddExpensePage() {
   return (
@@ -25,6 +26,7 @@ export default function AddExpensePage() {
           {/* Right - Receipt + Summary */}
           <div className="col-span-1 flex flex-col gap-4">
             <ReceiptUpload />
+            <ExpenseSummary />
           </div>
 
         </div>
