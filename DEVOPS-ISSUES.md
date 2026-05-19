@@ -106,6 +106,8 @@ volumes:
 - Use migration-generated files in PRs to make schema change intent visible.
 - Add a simple QA checklist in PR template for DB-impacting PRs (include: migration present, seed updated, tested locally).
 
+- Add a `docs/DB_MIGRATION_CHECKLIST.md` file and link it from `CONTRIBUTING.md` and this document to make required steps explicit for contributors.
+
 ## Next steps I can take for you
 - Create `.env.example`, `docker-compose.yml`, and a starter GitHub Actions workflow.
 - Add migration tool scaffolding (Prisma or Knex) and a basic migration + seed.
