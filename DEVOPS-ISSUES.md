@@ -8,6 +8,7 @@ This document captures findings from a quick DevOps review, identifies issues re
 - Backend currently has no database client or ORM in `backend/package.json`.
 - `dotenv` is used (`backend/src/server.ts` imports `dotenv/config`) but there is no `.env.example` or docs describing required env vars.
 - No migration tooling, seed data, Docker configuration, or CI workflows found in the repository.
+- No migration tooling, seed data, Docker configuration, or CI workflows found in the repository.
 
 ## Problems / Risks
 - No reproducible local DB: contributors have no standard way to run a database locally.
@@ -24,13 +25,14 @@ This document captures findings from a quick DevOps review, identifies issues re
   - Add `DEVOPS-ISSUES.md` (this file) and link from `backend/README.md`.
 
 2) Provide a reproducible local DB (1–2 days)
-  - Add a `docker-compose.yml` (or a `dev` Docker profile) that launches Postgres (recommended) and the backend.
+  - Recommended stack: **Postgres 16 + Prisma** (schema-first, great DX).
+  - Add a `docker-compose.yml` (already added in this repo) that launches Postgres and the backend.
   - Provide a one-liner to start local infra: `docker-compose up -d` and a short teardown command.
 
 3) Pick and add migration tooling (1–3 days)
-  - For TypeScript Node projects, consider Prisma (developer ergonomics + schema-first) or TypeORM/Knex depending on preference.
-  - Add migration commands to `package.json`, e.g. `db:migrate`, `db:seed`.
-  - Add a small initial migration and seed dataset to make local testing easy.
+  - Chosen tooling (recommended and implemented in this branch): **Prisma**.
+  - Add migration commands to `backend/package.json` using `pnpm`: `db:migrate`, `db:migrate:dev`, `db:seed`, `db:push`.
+  - Add an initial migration and seed dataset to make local testing easy (see `backend/prisma/`).
 
 4) CI integration for DB (1–2 days)
   - Add GitHub Actions workflow to run migrations and DB-integrated tests in PRs.
@@ -43,10 +45,23 @@ This document captures findings from a quick DevOps review, identifies issues re
 6) Backups, monitoring, and production readiness (ongoing)
   - If using managed DB (RDS, Cloud SQL), enable automated snapshots & point-in-time recovery.
   - Add basic monitoring/alerts (CPU, connection count, replication lag) and periodic backup tests.
+  - Backup & restore: document and automate regular backups. Example `pg_dump` snapshot and restore commands:
+
+```bash
+# create a logical backup
+pg_dump "$DATABASE_URL" -Fc -f backups/expense_dev-$(date +%F).dump
+
+# restore to a database
+pg_restore --clean --no-owner -d postgres://postgres:password@localhost:5432/expense_dev backups/expense_dev-2026-01-01.dump
+```
+
+  - Rollback strategy: prefer backward-compatible migrations. When a destructive migration is required:
+    - Create a migration that adds the new schema alongside the old, migrate data, then switch application to new schema.
+    - Maintain a rollback migration that can be applied by DBAs for emergency reversion.
 
 ## Suggested starter artifacts and examples
 
-- `.env.example` (example contents)
+-.env.example (example contents)
 
 ```
 NODE_ENV=development
@@ -60,7 +75,7 @@ DATABASE_URL=postgres://postgres:password@localhost:5432/expense_dev
 version: '3.8'
 services:
   db:
-    image: postgres:15
+    image: postgres:16
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
@@ -69,15 +84,20 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   db-data:
 ```
 
-- CI workflow high-level steps
-  - Start DB service (docker container or service from GitHub Actions marketplace).
-  - Run `npm install` / `pnpm install` in `backend`.
-  - Run migrations.
+-- CI workflow high-level steps
+  - Start DB service (docker container or the Actions `services` feature).
+  - Run `pnpm install` in the repo root and in `backend`.
+  - Run migrations (`pnpm --filter backend run db:migrate`).
   - Run tests that use the DB.
 
 ## Collaboration & process improvements
@@ -85,6 +105,8 @@ volumes:
 - Protect main branches and require PR reviews for schema changes.
 - Use migration-generated files in PRs to make schema change intent visible.
 - Add a simple QA checklist in PR template for DB-impacting PRs (include: migration present, seed updated, tested locally).
+
+- Add a `docs/DB_MIGRATION_CHECKLIST.md` file and link it from `CONTRIBUTING.md` and this document to make required steps explicit for contributors.
 
 ## Next steps I can take for you
 - Create `.env.example`, `docker-compose.yml`, and a starter GitHub Actions workflow.
