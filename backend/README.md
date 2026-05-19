@@ -48,15 +48,15 @@ The backend uses Postgres with Prisma ORM. To set up a local database:
 
 2. **Run migrations**:
    ```bash
-   npm run db:migrate
+   pnpm --filter backend run db:migrate
    ```
 
 3. **Seed initial data** (optional):
    ```bash
-   npm run db:seed
+   pnpm --filter backend run db:seed
    ```
 
-For details, see [CONTRIBUTING.md](../CONTRIBUTING.md).
+For details, see [CONTRIBUTING.md](../CONTRIBUTING.md). Use the example env at `backend/.env.example` to populate `backend/.env` for local runs.
 
 ## Scripts
 
