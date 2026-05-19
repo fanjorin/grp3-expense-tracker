@@ -45,6 +45,19 @@ This document captures findings from a quick DevOps review, identifies issues re
 6) Backups, monitoring, and production readiness (ongoing)
   - If using managed DB (RDS, Cloud SQL), enable automated snapshots & point-in-time recovery.
   - Add basic monitoring/alerts (CPU, connection count, replication lag) and periodic backup tests.
+  - Backup & restore: document and automate regular backups. Example `pg_dump` snapshot and restore commands:
+
+```bash
+# create a logical backup
+pg_dump "$DATABASE_URL" -Fc -f backups/expense_dev-$(date +%F).dump
+
+# restore to a database
+pg_restore --clean --no-owner -d postgres://postgres:password@localhost:5432/expense_dev backups/expense_dev-2026-01-01.dump
+```
+
+  - Rollback strategy: prefer backward-compatible migrations. When a destructive migration is required:
+    - Create a migration that adds the new schema alongside the old, migrate data, then switch application to new schema.
+    - Maintain a rollback migration that can be applied by DBAs for emergency reversion.
 
 ## Suggested starter artifacts and examples
 
