@@ -31,7 +31,7 @@ import Link from "next/link";
 
 // ── Import our components ──
 // Each import pulls in a component from the components/ folder
-import LeftPanel from "./components/LeftPanel";
+import LeftPanel from "./components/leftPanel";
 import EmailIcon from "./components/Emailicon";
 import OtpInput from "./components/OTPinput";
 import CountdownTimer from "./components/CountdownTimer";
