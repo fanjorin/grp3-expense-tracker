@@ -3,9 +3,9 @@
 import Link from "next/link";
 
 // ── Import components ───
-import LeftPanel from "./Components/LeftPanel";
-import LockIcon from "./Components/LockIcon";
-import EmailForm from "./Components/EmailForm";
+import LeftPanel from "./components/LeftPanel";
+import LockIcon from "./components/LockIcon";
+import EmailForm from "./components/EmailForm";
 
 export default function ForgotPasswordPage() {
   return (
