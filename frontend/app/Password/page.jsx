@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Logo from "../components/Logo";
 
 export default function PasswordPage() {
 
@@ -77,12 +78,7 @@ export default function PasswordPage() {
         <div className="bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex flex-col gap-5 hidden md:flex">
 
           {/* ── Logo ── */}
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
-              <span className="text-blue-600 font-bold text-sm">✓</span>
-            </div>
-            <span className="font-semibold text-sm">Expense Tracker</span>
-          </div>
+          <Logo textColor="text-white" />
 
           {/* ── Headline ── */}
           <h1 className="text-3xl font-bold leading-snug">
@@ -151,7 +147,7 @@ export default function PasswordPage() {
             <p className="text-sm text-white italic leading-relaxed">
               &ldquo;Setting up took less than 2 minutes. Now I know exactly where every naira goes.&rdquo;
             </p>
-            <p className="text-xs text-blue-300 mt-2">– Nwachukwu Pascal</p>
+            <p className="text-xs text-blue-300 mt-2">–  Rebecca Ushie</p>
           </div>
 
         </div>
@@ -258,7 +254,7 @@ export default function PasswordPage() {
             {/* ── Create Password button ── */}
             <button
               type="submit"
-              className="w-full bg-blue-800 hover:bg-blue-900 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all"
+              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all"
             >
               Create Password →
             </button>

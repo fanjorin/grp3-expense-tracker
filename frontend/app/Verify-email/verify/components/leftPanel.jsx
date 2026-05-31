@@ -3,20 +3,13 @@
 // ─────────────────────────────────────────────────────────────
 // This is the blue sidebar shown on the left side of the page.
 // It shows the branding, the 3 reset steps, and a testimonial.
-//
-// WHY A SEPARATE COMPONENT?
-// We pull this out of the main page so the main page stays clean
-// and easy to read. This panel could also be reused on other
-// forgot-password steps (step 1, step 3) without rewriting it.
 // ─────────────────────────────────────────────────────────────
 
-// No imports needed — this component has no state or interaction.
-// It just displays information (we call this a "presentational component")
+import Logo from "../../../components/Logo";
 
 export default function LeftPanel() {
 
   // ── STEPS DATA ───
-  // The 3 steps shown in the sidebar.
   // status options:
   //   "completed" → green checkmark (step is done)
   //   "active"    → white circle with number (current step)
@@ -26,33 +19,28 @@ export default function LeftPanel() {
       number: 1,
       title: "Enter your email",
       subtitle: "We'll send a reset code",
-      status: "completed", // user already did this step
+      status: "completed",
     },
     {
       number: 2,
       title: "Enter reset code",
       subtitle: "Check your inbox",
-      status: "active", // user is currently on this step
+      status: "active",
     },
     {
       number: 3,
       title: "Create new password",
       subtitle: "Make it strong!",
-      status: "upcoming", // user hasn't reached this yet
+      status: "upcoming",
     },
   ];
 
   return (
     // Blue sidebar — hidden on mobile, visible from medium screens up
-    <div className="hidden md:flex bg-blue-800 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
+    <div className="hidden md:flex bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
 
       {/* ── Logo ── */}
-      <div className="flex items-center gap-2">
-        <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
-          <span className="text-blue-800 font-bold text-sm">✓</span>
-        </div>
-        <span className="font-semibold text-sm">Expense Tracker</span>
-      </div>
+      <Logo textColor="text-white" />
 
       {/* ── Headline ── */}
       <h1 className="text-2xl font-bold leading-snug">
@@ -77,8 +65,7 @@ export default function LeftPanel() {
             {/* One step row: circle + text */}
             <div className="flex items-start gap-3">
 
-              {/* ── Circle indicator ──
-                  3 different looks depending on step status */}
+              {/* Circle indicator — 3 different looks based on status */}
               {step.status === "completed" ? (
                 // GREEN checkmark = step is done
                 <div className="w-7 h-7 min-w-[28px] rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
@@ -87,7 +74,7 @@ export default function LeftPanel() {
               ) : step.status === "active" ? (
                 // WHITE circle = current step
                 <div className="w-7 h-7 min-w-[28px] rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <span className="text-blue-800 text-xs font-bold">{step.number}</span>
+                  <span className="text-blue-600 text-xs font-bold">{step.number}</span>
                 </div>
               ) : (
                 // OUTLINED circle = upcoming step
@@ -115,8 +102,8 @@ export default function LeftPanel() {
         ))}
       </div>
 
-      {/* ── Testimonial — pushed to bottom of sidebar ── */}
-      <div className="mt-auto bg-blue-700 bg-opacity-50 rounded-xl p-4">
+      {/* ── Testimonial — pushed to bottom ── */}
+      <div className="mt-auto bg-blue-500 bg-opacity-50 rounded-xl p-4">
         <p className="text-sm text-white italic leading-relaxed">
           &ldquo;Reset was so smooth. I was back in my account within 2 minutes.&rdquo;
         </p>

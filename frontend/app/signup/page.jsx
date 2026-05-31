@@ -18,7 +18,7 @@ export default function SignUpPage() {
         <div className="hidden md:flex w-[38%] bg-blue-600 p-8 flex-col gap-5 text-white select-none">
 
          {/* ── Logo ── */}
-          <Logo />
+         <Logo textColor="text-white" />
           
           {/* ── Main Value Proposition ── */}
           <h1 className="text-3xl font-bold leading-snug">
@@ -71,7 +71,7 @@ export default function SignUpPage() {
             <p className="text-sm text-white italic leading-relaxed">
               &ldquo;Setting up took less than 2 minutes. Now I know exactly where every naira goes.&rdquo;
             </p>
-            <p className="text-xs text-blue-300 mt-2">- Nwachukwu Pascal</p>
+            <p className="text-xs text-blue-300 mt-2">-  Casca Felix</p>
           </div>
 
         </div>

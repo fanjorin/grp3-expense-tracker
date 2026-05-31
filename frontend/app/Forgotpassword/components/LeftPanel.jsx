@@ -9,7 +9,7 @@
 // — pulling it out keeps the main page clean and focused.
 // It also makes it easy to reuse across all forgot-password steps.
 // ─────────────────────────────────────────────────────────────
-
+import Logo from "../../components/Logo";
 export default function LeftPanel() {
 
   // ── STEPS DATA ───
@@ -39,15 +39,10 @@ export default function LeftPanel() {
 
   return (
     // Blue sidebar — hidden on mobile, visible from medium screens
-    <div className="hidden md:flex bg-blue-800 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
+    <div className="hidden md:flex bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
 
       {/* ── Logo ── */}
-      <div className="flex items-center gap-2">
-        <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
-          <span className="text-blue-800 font-bold text-sm">✓</span>
-        </div>
-        <span className="font-semibold text-sm">Expense Tracker</span>
-      </div>
+      <Logo textColor="text-white" />
 
       {/* ── Headline ── */}
       <h1 className="text-2xl font-bold leading-snug">
@@ -104,11 +99,11 @@ export default function LeftPanel() {
       </div>
 
       {/* ── Testimonial — pushed to bottom ── */}
-      <div className="mt-auto bg-blue-700 bg-opacity-50 rounded-xl p-4">
+      <div className="mt-auto bg-blue-500 bg-opacity-50 rounded-xl p-4">
         <p className="text-sm text-white italic leading-relaxed">
           &ldquo;Reset was so smooth. I was back in my account within 2 minutes.&rdquo;
         </p>
-        <p className="text-xs text-blue-300 mt-2">– Nwachukwu Pascal</p>
+        <p className="text-xs text-blue-300 mt-2">– Akorede Ahmed</p>
       </div>
 
     </div>

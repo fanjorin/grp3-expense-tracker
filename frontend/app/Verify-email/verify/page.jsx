@@ -109,7 +109,7 @@ export default function VerifyPage() {
             <button
               type="button"
               onClick={handleContinue}
-              className="w-full bg-blue-800 hover:bg-blue-900 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all mt-4"
+              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all mt-4"
             >
               Continue
             </button>

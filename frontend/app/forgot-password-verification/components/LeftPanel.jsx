@@ -9,7 +9,7 @@
 //   - 3 steps (step 1 completed, step 2 active, step 3 upcoming)
 //   - A testimonial quote at the bottom
 // ─────────────────────────────────────────────────────────────
-
+import Logo from "../../components/Logo";
 export default function LeftPanel() {
 
   // ── STEPS DATA ─────
@@ -45,14 +45,7 @@ export default function LeftPanel() {
     <div className="hidden md:flex bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
 
       {/* ── Logo ── */}
-      <div className="flex items-center gap-2">
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <span className="font-semibold text-sm">Expense Tracker</span>
-      </div>
+     <Logo textColor="text-white" />
 
       {/* ── Main headline ── */}
       <h1 className="text-2xl font-bold leading-snug">
@@ -120,7 +113,7 @@ export default function LeftPanel() {
         <p className="text-sm text-white italic leading-relaxed">
           &ldquo;Reset was so smooth. I was back in my account within 2 minutes.&rdquo;
         </p>
-        <p className="text-xs text-blue-300 mt-2">– Nwachukwu Pascal</p>
+        <p className="text-xs text-blue-300 mt-2">– Tobani Esan-George</p>
       </div>
 
     </div>

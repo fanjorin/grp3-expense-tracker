@@ -6,6 +6,7 @@ import EmailIcon from "./components/Mailicon";
 import OtpBoxes from "./components/OTPboxes";
 import ExpiryTimer from "./components/Timer";
 
+
 export default function CheckInboxPage() {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
 
@@ -34,7 +35,7 @@ export default function CheckInboxPage() {
             <button
               type="button"
               onClick={handleContinue}
-              className="w-full bg-blue-800 hover:bg-blue-900 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all mt-4"
+              className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all mt-4"
             >
               Continue
             </button>

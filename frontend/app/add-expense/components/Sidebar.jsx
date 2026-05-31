@@ -2,7 +2,7 @@ import Logo from "../../components/Logo";
 
 export default function Sidebar() {
   return (
-    <aside className="w-56 min-h-screen bg-white border-r border-gray-100 flex flex-col px-4 py-6 fixed left-0 top-0">
+    <aside className="w-60 min-h-screen bg-white border-r border-gray-100 flex flex-col px-4 py-6 fixed left-0 top-0">
 
       {/* Logo */}
       <div className="mb-10 px-2">

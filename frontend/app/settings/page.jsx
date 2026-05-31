@@ -13,7 +13,7 @@ export default function SettingsPage() {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="ml-56 flex-1 p-8">
+      <main className="ml-60 flex-1 p-8">
         <SettingsHeader />
 
         {/* Settings Layout */}
