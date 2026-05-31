@@ -12,21 +12,13 @@ const data = [
 
 export default function SpendingByCategory() {
   return (
-    <div className="bg-white rounded-xl p-5 shadow-sm">
+    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
 
       <h3 className="font-semibold text-gray-800 mb-4">Spending by Category</h3>
 
-      {/* Pie Chart */}
       <ResponsiveContainer width="100%" height={200}>
         <PieChart>
-          <Pie
-            data={data}
-            cx="40%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={90}
-            dataKey="value"
-          >
+          <Pie data={data} cx="40%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value">
             {data.map((entry, index) => (
               <Cell key={index} fill={entry.color} />
             ))}
@@ -35,10 +27,9 @@ export default function SpendingByCategory() {
         </PieChart>
       </ResponsiveContainer>
 
-      {/* Legend */}
       <div className="flex flex-col gap-2 mt-2">
         {data.map((entry, index) => (
-          <div key={index} className="flex items-center justify-between text-sm">
+          <div key={index} className="flex items-center justify-between text-sm hover:bg-gray-50 px-2 py-1 rounded-lg transition-colors duration-200">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
               <span className="text-gray-600">{entry.name}</span>
@@ -48,7 +39,6 @@ export default function SpendingByCategory() {
         ))}
       </div>
 
-      {/* Total */}
       <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
         <span className="text-sm text-gray-500">Total</span>
         <span className="text-sm font-bold text-gray-800">₦45,000</span>

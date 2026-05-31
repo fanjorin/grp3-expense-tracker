@@ -49,7 +49,7 @@ export default function SummaryCards() {
   return (
     <div className="grid grid-cols-4 gap-4 mb-6">
       {cards.map((card) => (
-        <div key={card.id} className="bg-white rounded-xl p-5 shadow-sm">
+        <div key={card.id} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer">
 
           {/* Icon */}
           <div className={`${card.iconBg} w-10 h-10 rounded-full flex items-center justify-center text-lg mb-3`}>

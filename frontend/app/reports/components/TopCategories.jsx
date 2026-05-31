@@ -8,15 +8,14 @@ const categories = [
 
 export default function TopCategories() {
   return (
-    <div className="bg-white rounded-xl p-5 shadow-sm">
+    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
 
       <h3 className="font-semibold text-gray-800 mb-4">Top Categories</h3>
 
       <div className="flex flex-col gap-4">
         {categories.map((cat) => (
-          <div key={cat.id}>
+          <div key={cat.id} className="hover:bg-gray-50 p-2 rounded-xl transition-colors duration-200">
 
-            {/* Category Row */}
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2 text-sm text-gray-700">
                 <span>{cat.icon}</span>
@@ -28,10 +27,9 @@ export default function TopCategories() {
               </div>
             </div>
 
-            {/* Progress Bar */}
             <div className="w-full bg-gray-100 rounded-full h-1.5">
               <div
-                className={`${cat.color} h-1.5 rounded-full`}
+                className={`${cat.color} h-1.5 rounded-full transition-all duration-500`}
                 style={{ width: `${cat.percent}%` }}
               ></div>
             </div>
