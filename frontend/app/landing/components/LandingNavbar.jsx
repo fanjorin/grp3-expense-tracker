@@ -1,29 +1,46 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Logo from "../../components/Logo";
+
+const navLinks = ["Features", "How It Works", "Pricing", "About Us", "Contact"];
+
 export default function LandingNavbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="flex items-center justify-between px-6 md:px-10 py-5 bg-white/70 backdrop-blur-sm sticky top-0 z-50">
+    <nav className={`flex items-center justify-between px-6 md:px-10 py-4 sticky top-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-white/70 backdrop-blur-sm"}`}>
 
       {/* Logo */}
-      <div className="flex items-center gap-2 text-blue-600 font-bold text-xl">
-        💰 Expense Tracker
-      </div>
+      <Logo />
 
-      {/* Nav Links - Hidden on mobile */}
+      {/* Nav Links */}
       <div className="hidden md:flex items-center gap-8 text-sm text-gray-600">
-        <a href="#" className="hover:text-blue-600">Features</a>
-        <a href="#" className="hover:text-blue-600">How It Works</a>
-        <a href="#" className="hover:text-blue-600">Pricing</a>
-        <a href="#" className="hover:text-blue-600">About Us</a>
-        <a href="#" className="hover:text-blue-600">Contact</a>
+        {navLinks.map((link) => (
+          <button
+            key={link}
+            className="relative hover:text-blue-600 transition-colors duration-200 group"
+          >
+            <span>{link}</span>
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
+        ))}
       </div>
 
       {/* Buttons */}
       <div className="flex items-center gap-3">
-        <a href="#" className="text-sm text-gray-600 hover:text-blue-600">
+        <button className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">
           Log in
-        </a>
-        <a href="#" className="bg-blue-600 text-white text-sm px-4 md:px-5 py-2 rounded-full hover:bg-blue-700">
+        </button>
+        <button className="bg-blue-600 text-white text-sm px-5 py-2 rounded-full hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200">
           Get Started Free
-        </a>
+        </button>
       </div>
 
     </nav>

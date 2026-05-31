@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-
 export default function PasswordPage() {
 
   // ── FORM STATE ──────────────────────────────────────────────
@@ -57,8 +56,8 @@ export default function PasswordPage() {
   // - Step 2 is "active" (white circle)
   // - Step 3 is still "upcoming" (outlined circle)
   const steps = [
-    { number: 1, title: "Your details",        subtitle: "Name & email address",  status: "completed" },
-    { number: 2, title: "Secure your account", subtitle: "Create a password",     status: "active" },
+    { number: 1, title: "Your details",        subtitle: "Name & email address",   status: "completed" },
+    { number: 2, title: "Secure your account", subtitle: "Create a password",      status: "active" },
     { number: 3, title: "Set your budget",     subtitle: "Monthly spending limit", status: "upcoming" },
   ];
 
@@ -66,37 +65,36 @@ export default function PasswordPage() {
   // RENDER
   // ─────────────────────────────────────────────────────────────
   return (
+    // Full screen grey background, card centered
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
 
-      {/* Card wrapper */}
-      <div className="flex w-full max-w-4xl rounded-2xl shadow-lg overflow-hidden">
-
+      {/* Card wrapper — holds left and right panels */}
+      <div className="flex w-full max-w-4xl rounded-2xl shadow-lg overflow-hidden min-h-[540px]">
 
         {/* ════════════════════════════════════════
-            LEFT PANEL — same as signup page
-            only the step indicators change
+            LEFT PANEL — blue sidebar
             ════════════════════════════════════════ */}
-        <div className="bg-blue-800 text-white w-72 flex-shrink-0 p-8 flex flex-col gap-5 hidden md:flex">
+        <div className="bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex flex-col gap-5 hidden md:flex">
 
-          {/* Logo */}
+          {/* ── Logo ── */}
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
-              <span className="text-blue-800 font-bold text-sm">✓</span>
+              <span className="text-blue-600 font-bold text-sm">✓</span>
             </div>
             <span className="font-semibold text-sm">Expense Tracker</span>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-2xl font-bold leading-snug">
+          {/* ── Headline ── */}
+          <h1 className="text-3xl font-bold leading-snug">
             You&rsquo;re one step away from financial clarity.
           </h1>
 
-          {/* Subtext */}
+          {/* ── Subtext ── */}
           <p className="text-sm text-blue-200 leading-relaxed">
             Join thousands of people already tracking smarter, spending better, and saving more.
           </p>
 
-          {/* Steps label */}
+          {/* ── Steps label ── */}
           <p className="text-xs font-bold tracking-widest text-blue-300 uppercase">
             Setup Steps
           </p>
@@ -108,7 +106,7 @@ export default function PasswordPage() {
 
                 <div className="flex items-start gap-3">
 
-                  {/* ── Step circle — 3 different states ──
+                  {/* Circle indicator — 3 different states:
                       completed → green circle with checkmark
                       active    → white circle with blue number
                       upcoming  → outlined circle             */}
@@ -120,7 +118,7 @@ export default function PasswordPage() {
                   ) : step.status === "active" ? (
                     // White circle for current step
                     <div className="w-7 h-7 min-w-[28px] rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                      <span className="text-blue-800 text-xs font-bold">{step.number}</span>
+                      <span className="text-blue-600 text-xs font-bold">{step.number}</span>
                     </div>
                   ) : (
                     // Outlined circle for upcoming steps
@@ -148,8 +146,8 @@ export default function PasswordPage() {
             ))}
           </div>
 
-          {/* Testimonial */}
-          <div className="mt-auto bg-blue-700 bg-opacity-50 rounded-xl p-4">
+          {/* ── Testimonial — pushed to bottom ── */}
+          <div className="mt-auto bg-blue-500 bg-opacity-50 rounded-xl p-4">
             <p className="text-sm text-white italic leading-relaxed">
               &ldquo;Setting up took less than 2 minutes. Now I know exactly where every naira goes.&rdquo;
             </p>
@@ -159,13 +157,12 @@ export default function PasswordPage() {
         </div>
         {/* END LEFT PANEL */}
 
-
         {/* ════════════════════════════════════════
             RIGHT PANEL — Password form
             ════════════════════════════════════════ */}
-        <div className="bg-white flex-1 p-10 flex flex-col">
+        <div className="bg-white flex-1 p-10 flex flex-col justify-center">
 
-          {/* Tabs */}
+          {/* ── Tabs ── */}
           <div className="flex gap-6 border-b border-gray-200 mb-7">
             <Link href="/login" className="pb-3 text-sm text-gray-500 hover:text-blue-800 transition-colors">
               Log in
@@ -175,12 +172,12 @@ export default function PasswordPage() {
             </span>
           </div>
 
-          {/* Heading */}
+          {/* ── Heading ── */}
           <h2 className="text-2xl font-bold text-gray-900 mb-1">Secure your account</h2>
           <p className="text-sm text-gray-500 mb-6">Create a password</p>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* ── Form ── */}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
             {/* Password field */}
             <div className="flex flex-col gap-1">
@@ -192,7 +189,7 @@ export default function PasswordPage() {
                 <input
                   id="password"
                   name="password"
-                  type={showPassword ? "text" : "password"} // toggle between text and password
+                  type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-gray-900 outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100 transition-all pr-10"
@@ -238,13 +235,13 @@ export default function PasswordPage() {
             )}
 
             {/* OR divider */}
-            <div className="flex items-center gap-3 my-1">
+            <div className="flex items-center gap-3">
               <div className="flex-1 h-px bg-gray-200" />
               <span className="text-xs text-gray-400">Or</span>
               <div className="flex-1 h-px bg-gray-200" />
             </div>
 
-            {/* Google button */}
+            {/* Google sign up button */}
             <button
               type="button"
               className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded-lg py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
@@ -258,7 +255,7 @@ export default function PasswordPage() {
               Sign up with Google
             </button>
 
-            {/* Create Password button */}
+            {/* ── Create Password button ── */}
             <button
               type="submit"
               className="w-full bg-blue-800 hover:bg-blue-900 active:scale-[0.99] text-white font-semibold py-3 rounded-lg text-sm transition-all"
@@ -274,4 +271,4 @@ export default function PasswordPage() {
       </div>
     </div>
   );
-  }
+}

@@ -5,33 +5,38 @@ export default function BudgetBanner() {
   const percentageUsed = (amountSpent / totalBudget) * 100;
 
   return (
-    <div className="mx-8 mt-6 bg-white rounded-xl p-6 shadow-sm">
-      
-      {/* Top Text */}
-      <p className="text-2xl font-semibold text-gray-800">
-        You've spent{" "}
-        <span className="text-blue-600 font-bold">₦{amountSpent.toLocaleString()}</span>{" "}
-        this month
-      </p>
+    <div className="mx-8 mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+
+      {/* Top Row */}
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-2xl font-bold text-gray-800">
+          You've spent{" "}
+          <span className="text-blue-600">₦{amountSpent.toLocaleString()}</span>{" "}
+          this month
+        </p>
+        <span className="text-sm text-gray-400 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+          ₦{amountLeft.toLocaleString()} left
+        </span>
+      </div>
 
       {/* Budget Info */}
-      <p className="text-sm text-blue-600 mt-2">
+      <p className="text-sm text-blue-600 mb-3">
         Budget: ₦{totalBudget.toLocaleString()}{" "}
         <span className="text-gray-400">| {percentageUsed}% used</span>
       </p>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-3 mt-3">
+      <div className="w-full bg-gray-100 rounded-full h-3">
         <div
-          className="bg-green-500 h-3 rounded-full"
-          style={{ width: `${percentageUsed}%` }}
+          className="h-3 rounded-full transition-all duration-500"
+          style={{
+            width: `${percentageUsed}%`,
+            background: percentageUsed > 80
+              ? "linear-gradient(to right, #f97316, #ef4444)"
+              : "linear-gradient(to right, #22c55e, #16a34a)"
+          }}
         ></div>
       </div>
-
-      {/* Amount Left */}
-      <p className="text-right text-sm text-gray-500 mt-1">
-        ₦{amountLeft.toLocaleString()} left
-      </p>
 
     </div>
   );

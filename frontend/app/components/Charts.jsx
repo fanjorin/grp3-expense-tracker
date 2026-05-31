@@ -26,18 +26,11 @@ export default function Charts() {
     <div className="mx-8 mt-6 grid grid-cols-3 gap-4">
 
       {/* Pie Chart */}
-      <div className="bg-white rounded-xl p-4 shadow-sm">
+      <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
         <h3 className="font-semibold text-gray-700 mb-4">Spending by Category</h3>
         <ResponsiveContainer width="100%" height={200}>
           <PieChart>
-            <Pie
-              data={pieData}
-              cx="50%"
-              cy="50%"
-              innerRadius={50}
-              outerRadius={80}
-              dataKey="value"
-            >
+            <Pie data={pieData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value">
               {pieData.map((entry, index) => (
                 <Cell key={index} fill={COLORS[index % COLORS.length]} />
               ))}
@@ -45,39 +38,40 @@ export default function Charts() {
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
-        {/* Legend */}
-        <div className="flex flex-col gap-1 mt-2">
+        <div className="flex flex-col gap-2 mt-2">
           {pieData.map((entry, index) => (
             <div key={index} className="flex items-center gap-2 text-sm">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }}></div>
-              <span>{entry.name}</span>
+              <span className="text-gray-600">{entry.name}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Bar Chart */}
-      <div className="bg-white rounded-xl p-4 shadow-sm">
+      <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
         <h3 className="font-semibold text-gray-700 mb-4">Spending Over Time</h3>
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={barData}>
-            <XAxis dataKey="day" />
+            <XAxis dataKey="day" tick={{ fontSize: 11, fill: "#9CA3AF" }} />
             <YAxis hide />
             <Tooltip />
-            <Bar dataKey="amount" fill="#4DA6FF" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="amount" fill="#4DA6FF" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
 
       {/* Insights */}
-      <div className="bg-white rounded-xl p-4 shadow-sm">
+      <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
         <h3 className="font-semibold text-gray-700 mb-4">Insights</h3>
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            🍔 <span>You spend the most on <strong>food</strong></span>
+          <div className="flex items-start gap-3 p-3 bg-orange-50 rounded-xl">
+            <span className="text-xl">🍔</span>
+            <p className="text-sm text-gray-600">You spend the most on <strong>food</strong></p>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            📈 <span>Your <strong>spending increased</strong> by 20% this week</span>
+          <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-xl">
+            <span className="text-xl">📈</span>
+            <p className="text-sm text-gray-600">Your <strong>spending increased</strong> by 20% this week</p>
           </div>
         </div>
       </div>

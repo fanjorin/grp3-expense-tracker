@@ -19,6 +19,10 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.7.1",
+<<<<<<< HEAD
+=======
+    "@types/cors": "^2.8.19",
+>>>>>>> 6e238235041bf75244549f751951abf30accd714
     "@types/morgan": "^1.9.10",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

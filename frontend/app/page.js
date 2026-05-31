@@ -3,6 +3,7 @@ import BudgetBanner from "./components/BudgetBanner";
 import ActionBar from "./components/ActionBar";
 import Charts from "./components/Charts";
 import ExpenseList from "./components/ExpenseList";
+import Logo from "./components/Logo";
 
 export default function Home() {
   return (

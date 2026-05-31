@@ -42,7 +42,7 @@ export default function LeftPanel() {
   return (
     // Blue sidebar
     // "hidden md:flex" → hidden on mobile, visible on medium+ screens
-    <div className="hidden md:flex bg-blue-800 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
+    <div className="hidden md:flex bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex-col gap-5 min-h-full">
 
       {/* ── Logo ── */}
       <div className="flex items-center gap-2">
@@ -116,7 +116,7 @@ export default function LeftPanel() {
       </div>
 
       {/* ── Testimonial quote — pushed to bottom of sidebar ── */}
-      <div className="mt-auto bg-blue-700 bg-opacity-50 rounded-xl p-4">
+      <div className="bg-white/10 p-6 rounded-xl border border-white/10 backdrop-blur-sm">
         <p className="text-sm text-white italic leading-relaxed">
           &ldquo;Reset was so smooth. I was back in my account within 2 minutes.&rdquo;
         </p>
