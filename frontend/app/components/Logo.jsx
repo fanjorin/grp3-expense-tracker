@@ -1,4 +1,4 @@
-export default function Logo() {
+export default function Logo({ textColor = "text-blue-600" }) {
   return (
     <div className="flex items-center gap-2">
 
@@ -21,7 +21,7 @@ export default function Logo() {
       </div>
 
       {/* Text */}
-      <span className="text-blue-600 font-bold text-lg tracking-tight">
+      <span className={`${textColor} font-bold text-lg tracking-tight`}>
         Expense Tracker
       </span>
 
