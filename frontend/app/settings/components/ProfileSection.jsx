@@ -1,6 +1,6 @@
 export default function ProfileSection() {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 mb-4">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-4 hover:shadow-md transition-shadow duration-300">
 
       <h2 className="font-semibold text-gray-800 text-lg mb-6">
         Profile Information
@@ -10,11 +10,10 @@ export default function ProfileSection() {
 
         {/* Avatar */}
         <div className="relative">
-          <div className="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center">
+          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
             <span className="text-5xl">👤</span>
           </div>
-          {/* Camera Icon */}
-          <div className="absolute bottom-0 right-0 bg-blue-600 rounded-full w-7 h-7 flex items-center justify-center cursor-pointer hover:bg-blue-700">
+          <div className="absolute bottom-0 right-0 bg-blue-600 rounded-full w-7 h-7 flex items-center justify-center cursor-pointer hover:bg-blue-700 hover:scale-110 transition-all duration-200 shadow-md">
             <span className="text-white text-xs">📷</span>
           </div>
         </div>
@@ -29,8 +28,8 @@ export default function ProfileSection() {
             </label>
             <input
               type="text"
-              defaultValue=" Onyi Lawrence"
-              className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm text-gray-800 outline-none focus:border-blue-400"
+              defaultValue="John Doe"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 transition-all duration-200"
             />
           </div>
 
@@ -41,14 +40,14 @@ export default function ProfileSection() {
             </label>
             <input
               type="email"
-              defaultValue="pogba.junior@gmail.com"
-              className="w-full border border-gray-200 rounded-lg px-4 py-2 text-sm text-gray-800 outline-none focus:border-blue-400"
+              defaultValue="john.doe@example.com"
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 transition-all duration-200"
             />
           </div>
 
           {/* Save Button */}
           <div className="flex justify-end">
-            <button className="bg-blue-600 text-white text-sm px-6 py-2 rounded-lg hover:bg-blue-700">
+            <button className="bg-blue-600 text-white text-sm px-6 py-2.5 rounded-xl hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium">
               Save Changes
             </button>
           </div>
