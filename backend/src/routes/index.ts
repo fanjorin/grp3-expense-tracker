@@ -1,9 +1,12 @@
 import { Router, Request, Response } from 'express';
 import { Transaction, CreateTransactionDTO, UpdateTransactionDTO } from '../models/Transaction';
 import { v4 as uuidv4 } from 'uuid';
+import authRouter from './auth';
 
 const router = Router();
 let transactions: Transaction[] = [];
+
+router.use('/auth', authRouter);
 
 router.get('/transactions', (req: Request, res: Response) => {
   res.json({ success: true, data: transactions });

@@ -1,10 +1,48 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Logo from "../components/Logo";
+import { authAPI } from "../../services/api";
 
 export default function SignUpPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+  });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await authAPI.signup(formData);
+      if (response.success) {
+        // Successfully signed up basic info, now move to password creation
+        // We'll pass the email in the query param for the next step
+        router.push(`/signup/set-password?email=${encodeURIComponent(formData.email)}`);
+      } else {
+        setError(response.error || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setError('Connection error. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     // 1. MAIN WRAPPER: Grey background with card centered in the middle
     <div className="min-h-screen w-full bg-gray-100 flex items-center justify-center p-6 text-slate-800">
@@ -94,30 +132,72 @@ export default function SignUpPage() {
             <p className="text-sm text-slate-400 mb-8">Let's start with your basic information</p>
 
             {/* ── Information Input Form ── */}
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+
+              {/* Error Message */}
+              {error && (
+                <div className="p-3 bg-red-50 border border-red-100 text-red-600 text-sm rounded-lg">
+                  {error}
+                </div>
+              )}
 
               {/* Dual Column Row for Names */}
               <div className="flex gap-4">
                 <div className="flex-1">
                   <label htmlFor="firstName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">First Name</label>
-                  <input type="text" name="firstName" id="firstName" placeholder="Pascal" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+                  <input 
+                    type="text" 
+                    name="firstName" 
+                    id="firstName" 
+                    placeholder="Pascal" 
+                    required
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" 
+                  />
                 </div>
                 <div className="flex-1">
                   <label htmlFor="lastName" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Last Name</label>
-                  <input type="text" name="lastName" id="lastName" placeholder="Nwachukwu" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+                  <input 
+                    type="text" 
+                    name="lastName" 
+                    id="lastName" 
+                    placeholder="Nwachukwu" 
+                    required
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" 
+                  />
                 </div>
               </div>
 
               {/* Email Address Input */}
               <div>
                 <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email address</label>
-                <input type="email" name="email" id="email" placeholder="you@gmail.com" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+                <input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  placeholder="you@gmail.com" 
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" 
+                />
               </div>
 
               {/* Phone Number Input */}
               <div>
                 <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone number</label>
-                <input type="tel" name="phone" id="phone" placeholder="+234 000 000 000" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+                <input 
+                  type="tel" 
+                  name="phone" 
+                  id="phone" 
+                  placeholder="+234 000 000 000" 
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" 
+                />
               </div>
 
               {/* Decorative Content Divider */}
@@ -138,8 +218,12 @@ export default function SignUpPage() {
               </button>
 
               {/* Submit Button */}
-              <button type="submit" className="w-full bg-[#0052CC] text-white p-3.5 rounded-lg text-sm font-semibold hover:bg-blue-700 active:bg-blue-800 transition shadow-sm shadow-blue-600/10">
-                Continue →
+              <button 
+                type="submit" 
+                disabled={isLoading}
+                className="w-full bg-[#0052CC] text-white p-3.5 rounded-lg text-sm font-semibold hover:bg-blue-700 active:bg-blue-800 transition shadow-sm shadow-blue-600/10 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'Creating account...' : 'Continue →'}
               </button>
 
             </form>

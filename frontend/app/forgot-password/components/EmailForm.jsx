@@ -1,25 +1,11 @@
 "use client";
-// ↑ Required because this component has user interaction:
-//   typing in the email field and clicking the button
-
-// ─────────────────────────────────────────────────────────────
-// COMPONENT: EmailForm.jsx
-// ─────────────────────────────────────────────────────────────
-// Renders the email input field and "Send reset code" button.
-//
-// WHY A SEPARATE COMPONENT?
-// The form has its own state and logic — pulling it out of
-// the main page keeps things clean and separated.
-// The backend team only needs to look at this ONE file to
-// know where to plug in the API call.
-
-
-"use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { authAPI } from "../../../services/api";
 
 export default function EmailForm() {
-
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -41,10 +27,14 @@ export default function EmailForm() {
     setIsLoading(true);
 
     try {
-      console.log("Sending reset code to:", email);
-      // TODO: Backend team adds API call here
+      const response = await authAPI.forgotPassword(email);
+      if (response.success) {
+        router.push(`/forgot-password/verify?email=${encodeURIComponent(email)}`);
+      } else {
+        setError(response.error || "Something went wrong. Please try again.");
+      }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("Connection error. Please try again later.");
     } finally {
       setIsLoading(false);
     }

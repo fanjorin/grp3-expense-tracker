@@ -2,10 +2,48 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Logo from "../components/Logo";
+import { authAPI } from "../../services/api";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await authAPI.login(formData);
+      if (response.success) {
+        // Save token to localStorage (simple implementation)
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        
+        // Redirect to dashboard
+        router.push('/dashboard');
+      } else {
+        setError(response.error || 'Invalid email or password.');
+      }
+    } catch (err) {
+      setError('Connection error. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     // 1. MAIN WRAPPER: Grey background with card centered in the middle
@@ -58,12 +96,28 @@ export default function LoginPage() {
             <p className="text-sm text-slate-400 mb-8">Enter your details to access your dashboard</p>
 
             {/* ── Login Form ── */}
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
+
+              {/* Error Message */}
+              {error && (
+                <div className="p-3 bg-red-50 border border-red-100 text-red-600 text-sm rounded-lg">
+                  {error}
+                </div>
+              )}
 
               {/* Email Address Input */}
               <div>
                 <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email address</label>
-                <input type="email" name="email" id="email" placeholder="you@gmail.com" className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" />
+                <input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  placeholder="you@gmail.com" 
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" 
+                />
               </div>
 
               {/* Password Input */}
@@ -78,6 +132,9 @@ export default function LoginPage() {
                     name="password" 
                     id="password" 
                     placeholder="••••••••" 
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
                     className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-500 focus:bg-white transition" 
                   />
                   <button 
@@ -109,8 +166,12 @@ export default function LoginPage() {
               </button>
 
               {/* Submit Button */}
-              <button type="submit" className="w-full bg-[#0052CC] text-white p-3.5 rounded-lg text-sm font-semibold hover:bg-blue-700 active:bg-blue-800 transition shadow-sm shadow-blue-600/10">
-                Log in →
+              <button 
+                type="submit" 
+                disabled={isLoading}
+                className="w-full bg-[#0052CC] text-white p-3.5 rounded-lg text-sm font-semibold hover:bg-blue-700 active:bg-blue-800 transition shadow-sm shadow-blue-600/10 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isLoading ? 'Logging in...' : 'Log in →'}
               </button>
 
             </form>

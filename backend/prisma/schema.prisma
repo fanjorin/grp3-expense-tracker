@@ -11,11 +11,18 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  firstName        String?
+  lastName         String?
+  password         String?
+  phoneNumber      String?
+  isVerified       Boolean  @default(false)
+  verificationCode String?
+  resetToken       String?
+  resetTokenExpires DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   expenses Expense[]
   budgets  Budget[]

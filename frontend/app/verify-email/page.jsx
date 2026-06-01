@@ -2,8 +2,8 @@
 // ↑ Required because this page uses useState for the OTP data
 
 // ─────────────────────────────────────────────────────────────
-// PAGE: Verify-email/verify/page.jsx
-// URL:  /verify-email/verify
+// PAGE: verify-email/page.jsx
+// URL:  /verify-email
 // ─────────────────────────────────────────────────────────────
 // This is the "Check your inbox" page — Step 2 of the
 // Verify Email flow.
@@ -59,7 +59,7 @@ export default function VerifyPage() {
 
     console.log("OTP submitted:", otpCode);
     // TODO: send otpCode to backend API for verification
-    // If valid → navigate to /verify-email/new-password
+    // If valid → navigate to /dashboard
   };
 
   // ── RENDER ──
