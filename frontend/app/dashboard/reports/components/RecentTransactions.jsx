@@ -36,56 +36,67 @@ export default function RecentTransactions() {
   };
 
   if (isLoading) {
-    return <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 animate-pulse h-64"></div>;
+    return <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-64"></div>;
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden h-full">
 
-      <h3 className="font-semibold text-gray-800 mb-4">Recent Transactions</h3>
+      <div className="px-6 py-5 border-b border-slate-50 flex items-center justify-between">
+        <h3 className="font-bold text-slate-800 flex items-center gap-2">
+          <span className="p-1.5 bg-indigo-50 rounded-lg text-indigo-600 text-sm">🕰️</span>
+          Activity Log
+        </h3>
+        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Latest 5</span>
+      </div>
 
-      {transactions.length > 0 ? (
-        <>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="text-left text-gray-400 border-b border-gray-100">
-                <th className="pb-3 font-medium">Date</th>
-                <th className="pb-3 font-medium">Description</th>
-                <th className="pb-3 font-medium">Category</th>
-                <th className="pb-3 font-medium">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactions.map((transaction) => (
-                <tr key={transaction.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors duration-150">
-                  <td className="py-3 text-gray-500">
-                    {new Date(transaction.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
-                  </td>
-                  <td className="py-3 text-gray-800">{transaction.description || "No description"}</td>
-                  <td className="py-3">
-                    <span className={`${getCategoryColor(transaction.category, transaction.type)} text-xs px-3 py-1 rounded-full font-medium`}>
-                      {transaction.category}
-                    </span>
-                  </td>
-                  <td className={`py-3 font-semibold ${transaction.type === 'INCOME' ? 'text-green-500' : 'text-red-500'}`}>
-                    {transaction.type === 'INCOME' ? '+ ' : '- '}₦{transaction.amount.toLocaleString()}
-                  </td>
+      <div className="overflow-x-auto">
+        {transactions.length > 0 ? (
+          <>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-50/50 text-slate-400 text-left border-b border-slate-100">
+                  <th className="px-6 py-4 font-bold uppercase tracking-wider text-[10px]">Date</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-wider text-[10px]">Description</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-wider text-[10px]">Category</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-wider text-[10px] text-right">Amount</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {transactions.map((transaction) => (
+                  <tr key={transaction.id} className="group hover:bg-slate-50/30 transition-colors">
+                    <td className="px-6 py-4">
+                      <span className="text-slate-400 font-medium text-xs">
+                        {new Date(transaction.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 font-semibold text-slate-700">{transaction.description || "—"}</td>
+                    <td className="px-6 py-4">
+                      <span className={`${getCategoryColor(transaction.category, transaction.type)} text-[10px] px-2.5 py-1 rounded-full font-bold uppercase tracking-tighter`}>
+                        {transaction.category}
+                      </span>
+                    </td>
+                    <td className={`px-6 py-4 font-black text-right ${transaction.type === 'INCOME' ? 'text-green-500' : 'text-slate-900'}`}>
+                      {transaction.type === 'INCOME' ? '+ ' : '- '}₦{transaction.amount.toLocaleString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
-          <div className="text-center mt-4">
-            <button className="text-blue-600 text-sm hover:text-blue-700 hover:underline transition-colors duration-200 font-medium">
-              View all transactions →
-            </button>
+            <div className="px-6 py-4 bg-slate-50/30 border-t border-slate-50 text-center">
+              <button className="text-[10px] font-black text-blue-600 hover:text-blue-700 uppercase tracking-widest transition">
+                View Full History →
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-16 text-slate-400 gap-2">
+            <span className="text-3xl">🏜️</span>
+            <p className="text-xs font-bold uppercase tracking-widest">No activity log found</p>
           </div>
-        </>
-      ) : (
-        <div className="text-center py-10 text-gray-400 text-sm">
-          No transactions found
-        </div>
-      )}
+        )}
+      </div>
 
     </div>
   );

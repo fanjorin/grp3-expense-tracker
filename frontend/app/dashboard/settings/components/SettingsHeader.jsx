@@ -1,9 +1,9 @@
 export default function SettingsHeader() {
   return (
-    <div className="mb-6">
-      <h1 className="text-2xl font-bold text-gray-800">Settings</h1>
-      <p className="text-gray-500 text-sm mt-1">
-        Manage your account, preferences and more.
+    <div className="flex flex-col gap-1">
+      <h1 className="text-2xl font-black text-slate-900 tracking-tight text-center md:text-left">Account Settings</h1>
+      <p className="text-slate-500 text-sm font-medium text-center md:text-left">
+        Manage your profile, application preferences, and security.
       </p>
     </div>
   );

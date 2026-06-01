@@ -1,20 +1,21 @@
 export default function ReportsHeader() {
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="flex items-center justify-between">
 
       {/* Title */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-800">Reports</h1>
-        <p className="text-gray-500 text-sm mt-1">
-          Analyze your spending and discover insights.
+      <div className="flex flex-col gap-1">
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Financial Reports</h1>
+        <p className="text-slate-500 text-sm font-medium">
+          Deep dive into your spending habits and financial health.
         </p>
       </div>
 
       {/* Date Range Picker */}
-      <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-4 py-2 text-sm text-gray-600 cursor-pointer hover:bg-gray-50">
-        📅 Apr 1 — Apr 30, 2025
-        <span className="text-gray-400">▾</span>
-      </div>
+      <button className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-5 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all shadow-sm">
+        <span className="text-blue-600">📅</span>
+        APR 1 — APR 30, 2026
+        <span className="text-slate-400">▾</span>
+      </button>
 
     </div>
   );

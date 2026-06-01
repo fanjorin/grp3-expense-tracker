@@ -36,46 +36,53 @@ export default function SpendingByCategory() {
   const totalSpent = data.reduce((acc, curr) => acc + curr.rawAmount, 0);
 
   if (isLoading) {
-    return <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 animate-pulse h-[400px]"></div>;
+    return <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-[400px]"></div>;
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 h-full">
 
-      <h3 className="font-semibold text-gray-800 mb-4">Spending by Category</h3>
+      <h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
+        <span className="p-1.5 bg-blue-50 rounded-lg text-blue-600 text-sm">🥧</span>
+        By Category
+      </h3>
 
       {data.length > 0 ? (
         <>
           <ResponsiveContainer width="100%" height={200}>
             <PieChart>
-              <Pie data={data} cx="50%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value">
+              <Pie data={data} cx="50%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value" paddingAngle={5}>
                 {data.map((entry, index) => (
                   <Cell key={index} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value) => `${Math.round(value)}%`} />
+              <Tooltip 
+                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+                formatter={(value) => `${Math.round(value)}%`} 
+              />
             </PieChart>
           </ResponsiveContainer>
 
-          <div className="flex flex-col gap-2 mt-2 max-h-[150px] overflow-y-auto">
+          <div className="flex flex-col gap-2 mt-4 max-h-[180px] overflow-y-auto pr-2 custom-scrollbar">
             {data.map((entry, index) => (
-              <div key={index} className="flex items-center justify-between text-sm hover:bg-gray-50 px-2 py-1 rounded-lg transition-colors duration-200">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
-                  <span className="text-gray-600">{entry.name}</span>
+              <div key={index} className="flex items-center justify-between text-sm hover:bg-slate-50 px-3 py-2 rounded-xl transition-all group cursor-default">
+                <div className="flex items-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: entry.color }}></div>
+                  <span className="text-slate-600 group-hover:text-slate-900 transition-colors">{entry.name}</span>
                 </div>
-                <span className="text-gray-800 font-medium">{entry.amount}</span>
+                <span className="text-slate-800 font-bold">{entry.amount}</span>
               </div>
             ))}
           </div>
 
-          <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-            <span className="text-sm text-gray-500">Total</span>
-            <span className="text-sm font-bold text-gray-800">₦{totalSpent.toLocaleString()}</span>
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-50">
+            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Spent</span>
+            <span className="text-lg font-black text-slate-900">₦{totalSpent.toLocaleString()}</span>
           </div>
         </>
       ) : (
-        <div className="h-[300px] flex items-center justify-center text-gray-400 text-sm">
+        <div className="h-[300px] flex flex-col items-center justify-center text-slate-400 text-sm gap-2">
+          <span className="text-3xl">🏜️</span>
           No data available
         </div>
       )}

@@ -25,7 +25,7 @@ export default function SummaryPanel() {
   }, []);
 
   if (isLoading) {
-    return <div className="bg-white rounded-xl p-5 shadow-sm animate-pulse h-[400px]"></div>;
+    return <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-[400px]"></div>;
   }
 
   const income = stats?.current?.income || 0;
@@ -33,34 +33,38 @@ export default function SummaryPanel() {
   const savings = Math.max(0, income - spent);
 
   const data = [
-    { name: "Total Income", value: income, color: "#4CAF50" },
-    { name: "Total Spent", value: spent, color: "#FF6B6B" },
-    { name: "Total Savings", value: savings, color: "#4DA6FF" },
+    { name: "Income", value: income, color: "#10b981" },
+    { name: "Spent", value: spent, color: "#ef4444" },
+    { name: "Savings", value: savings, color: "#3b82f6" },
   ];
 
   const savingsChange = stats?.changes?.income - stats?.changes?.expense;
 
   return (
-    <div className="bg-white rounded-xl p-5 shadow-sm">
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 h-full">
 
-      <h3 className="font-semibold text-gray-800 mb-4">Summary</h3>
+      <h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
+        <span className="p-1.5 bg-purple-50 rounded-lg text-purple-600 text-sm">💰</span>
+        Quick Summary
+      </h3>
 
       {/* Donut Chart */}
-      <div className="relative">
-        <ResponsiveContainer width="100%" height={180}>
+      <div className="relative mb-6">
+        <ResponsiveContainer width="100%" height={220}>
           <PieChart>
             <Pie
               data={data}
               cx="50%"
               cy="50%"
-              innerRadius={55}
-              outerRadius={80}
+              innerRadius={65}
+              outerRadius={90}
               dataKey="value"
               startAngle={90}
               endAngle={-270}
+              paddingAngle={5}
             >
               {data.map((entry, index) => (
-                <Cell key={index} fill={entry.color} />
+                <Cell key={index} fill={entry.color} stroke="none" />
               ))}
             </Pie>
           </PieChart>
@@ -68,20 +72,20 @@ export default function SummaryPanel() {
 
         {/* Center Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-xl font-bold text-gray-800">₦{savings.toLocaleString()}</p>
-          <p className="text-xs text-gray-500">Saved</p>
+          <p className="text-2xl font-black text-slate-900 leading-none">₦{savings.toLocaleString()}</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Net Savings</p>
         </div>
       </div>
 
       {/* Legend */}
-      <div className="flex flex-col gap-2 mt-4">
+      <div className="flex flex-col gap-3">
         {data.map((entry, index) => (
-          <div key={index} className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: entry.color }}></div>
-              <span className="text-gray-600">{entry.name}</span>
+          <div key={index} className="flex items-center justify-between text-sm group cursor-default">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: entry.color }}></div>
+              <span className="text-slate-500 font-medium group-hover:text-slate-900 transition-colors">{entry.name}</span>
             </div>
-            <span className="font-medium text-gray-800">
+            <span className="font-bold text-slate-800">
               ₦{entry.value.toLocaleString()}
             </span>
           </div>
@@ -90,16 +94,16 @@ export default function SummaryPanel() {
 
       {/* Message */}
       {savings > 0 && (
-        <div className="flex items-center gap-2 bg-green-50 rounded-lg p-3 mt-4">
-          <span className="text-green-500 text-lg">📈</span>
+        <div className="flex items-start gap-3 bg-slate-50 rounded-2xl p-4 mt-8 border border-slate-100 group transition-colors hover:bg-green-50/50 hover:border-green-100">
+          <span className="text-xl group-hover:scale-110 transition-transform">🎯</span>
           <div>
-            <p className="text-xs font-semibold text-gray-800">
-              {savingsChange > 0 ? "Great job!" : "Keep it up!"}
+            <p className="text-xs font-bold text-slate-900 mb-0.5">
+              {savingsChange > 0 ? "Outstanding Progress!" : "Staying Consistent"}
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-[10px] text-slate-500 leading-relaxed font-medium">
               {savingsChange > 0 
-                ? `You saved ${Math.round(savingsChange)}% more than last month.`
-                : "Try to increase your savings next month."}
+                ? `Your net savings increased by ${Math.round(savingsChange)}% this month. Brilliant!`
+                : "Your savings are on track. Continue maintaining your financial discipline."}
             </p>
           </div>
         </div>

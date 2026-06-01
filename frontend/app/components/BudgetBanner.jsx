@@ -20,7 +20,7 @@ export default function BudgetBanner() {
 
   if (isLoading)
     return (
-      <div className="mx-8 mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 animate-pulse h-32"></div>
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-32"></div>
     );
 
   const amountSpent = summary?.spent || 0;
@@ -29,39 +29,39 @@ export default function BudgetBanner() {
   const percentageUsed = summary?.percentage || 0;
 
   return (
-    <div className="mx-8 mt-6 bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300">
       {/* Top Row */}
       <div className="flex items-center justify-between mb-3">
-        <p className="text-2xl font-bold text-gray-800">
+        <p className="text-2xl font-bold text-slate-800">
           You've spent{" "}
           <span className="text-blue-600">₦{amountSpent.toLocaleString()}</span>{" "}
           this month
         </p>
         <span
-          className={`text-sm px-3 py-1 rounded-full border ${amountLeft < 5000 ? "text-red-500 bg-red-50 border-red-100" : "text-gray-400 bg-gray-50 border-gray-100"}`}
+          className={`text-xs font-semibold px-3 py-1 rounded-full border ${amountLeft < 5000 ? "text-red-600 bg-red-50 border-red-100" : "text-slate-500 bg-slate-50 border-slate-200"}`}
         >
           ₦{amountLeft.toLocaleString()} left
         </span>
       </div>
 
       {/* Budget Info */}
-      <p className="text-sm text-blue-600 mb-3">
-        Budget: ₦{totalBudget.toLocaleString()}{" "}
-        <span className="text-gray-400">
-          | {Math.round(percentageUsed)}% used
+      <p className="text-sm font-medium text-blue-600 mb-4">
+        Monthly Budget: ₦{totalBudget.toLocaleString()}{" "}
+        <span className="text-slate-400 font-normal ml-2">
+          | {Math.round(percentageUsed)}% utilized
         </span>
       </p>
 
-      {/* Progress Bar */}
-      <div className="w-full bg-gray-100 rounded-full h-3">
+      {/* Progress Bar Container */}
+      <div className="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden">
         <div
-          className="h-3 rounded-full transition-all duration-500"
+          className="h-full rounded-full transition-all duration-700 ease-out"
           style={{
             width: `${percentageUsed}%`,
             background:
               percentageUsed > 80
-                ? "linear-gradient(to right, #f97316, #ef4444)"
-                : "linear-gradient(to right, #22c55e, #16a34a)",
+                ? "linear-gradient(90deg, #f97316, #ef4444)"
+                : "linear-gradient(90deg, #3b82f6, #2563eb)",
           }}
         ></div>
       </div>
