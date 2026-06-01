@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import routes from "./routes";
+import * as _ from "./types/express";
 
 const app: Express = express();
 

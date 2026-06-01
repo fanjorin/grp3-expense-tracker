@@ -1,14 +1,45 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-
-const data = [
-  { name: "Total Income", value: 80000, color: "#4CAF50" },
-  { name: "Total Spent", value: 45000, color: "#FF6B6B" },
-  { name: "Total Savings", value: 35000, color: "#4DA6FF" },
-];
+import { reportAPI } from "@/services/api";
 
 export default function SummaryPanel() {
+  const [stats, setStats] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await reportAPI.getStats();
+        if (res?.success) {
+          setStats(res.data);
+        }
+      } catch (error) {
+        console.error("Error fetching summary panel stats:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchStats();
+  }, []);
+
+  if (isLoading) {
+    return <div className="bg-white rounded-xl p-5 shadow-sm animate-pulse h-[400px]"></div>;
+  }
+
+  const income = stats?.current?.income || 0;
+  const spent = stats?.current?.expense || 0;
+  const savings = Math.max(0, income - spent);
+
+  const data = [
+    { name: "Total Income", value: income, color: "#4CAF50" },
+    { name: "Total Spent", value: spent, color: "#FF6B6B" },
+    { name: "Total Savings", value: savings, color: "#4DA6FF" },
+  ];
+
+  const savingsChange = stats?.changes?.income - stats?.changes?.expense;
+
   return (
     <div className="bg-white rounded-xl p-5 shadow-sm">
 
@@ -37,7 +68,7 @@ export default function SummaryPanel() {
 
         {/* Center Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-xl font-bold text-gray-800">₦35,000</p>
+          <p className="text-xl font-bold text-gray-800">₦{savings.toLocaleString()}</p>
           <p className="text-xs text-gray-500">Saved</p>
         </div>
       </div>
@@ -57,14 +88,22 @@ export default function SummaryPanel() {
         ))}
       </div>
 
-      {/* Great Job Message */}
-      <div className="flex items-center gap-2 bg-green-50 rounded-lg p-3 mt-4">
-        <span className="text-green-500 text-lg">📈</span>
-        <div>
-          <p className="text-xs font-semibold text-gray-800">Great job!</p>
-          <p className="text-xs text-gray-500">You saved 15.2% more than last month.</p>
+      {/* Message */}
+      {savings > 0 && (
+        <div className="flex items-center gap-2 bg-green-50 rounded-lg p-3 mt-4">
+          <span className="text-green-500 text-lg">📈</span>
+          <div>
+            <p className="text-xs font-semibold text-gray-800">
+              {savingsChange > 0 ? "Great job!" : "Keep it up!"}
+            </p>
+            <p className="text-xs text-gray-500">
+              {savingsChange > 0 
+                ? `You saved ${Math.round(savingsChange)}% more than last month.`
+                : "Try to increase your savings next month."}
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
     </div>
   );

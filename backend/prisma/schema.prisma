@@ -31,11 +31,12 @@ model User {
 }
 
 model Expense {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   userId      Int
   category    String
   amount      Float
   description String?
+  type        String   @default("EXPENSE") // INCOME or EXPENSE
   date        DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

@@ -1,6 +1,14 @@
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1";
 
+const getHeaders = () => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+  };
+};
+
 export const authAPI = {
   signup: async (userData) => {
     const response = await fetch(`${API_BASE_URL}/auth/signup`, {
@@ -62,7 +70,7 @@ export const transactionAPI = {
     try {
       const response = await fetch(`${API_BASE_URL}/transactions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getHeaders(),
         body: JSON.stringify(data),
       });
       return await response.json();
@@ -73,11 +81,13 @@ export const transactionAPI = {
 
   getAll: async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/transactions`);
+      const response = await fetch(`${API_BASE_URL}/transactions`, {
+        headers: getHeaders(),
+      });
       return await response.json();
     } catch (error) {
       console.error("Error fetching transactions:", error);
-      return [];
+      return { success: false, data: [] };
     }
   },
 
@@ -85,10 +95,88 @@ export const transactionAPI = {
     try {
       const response = await fetch(`${API_BASE_URL}/transactions/${id}`, {
         method: "DELETE",
+        headers: getHeaders(),
       });
       return await response.json();
     } catch (error) {
       console.error("Error deleting transaction:", error);
+    }
+  },
+};
+
+export const budgetAPI = {
+  getAll: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/budgets`, {
+        headers: getHeaders(),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching budgets:", error);
+      return { success: false, data: [] };
+    }
+  },
+
+  save: async (data) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/budgets`, {
+        method: "POST",
+        headers: getHeaders(),
+        body: JSON.stringify(data),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error saving budget:", error);
+    }
+  },
+};
+
+export const reportAPI = {
+  getSummary: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/reports/summary`, {
+        headers: getHeaders(),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching report summary:", error);
+      return { success: false, data: null };
+    }
+  },
+
+  getCategories: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/reports/categories`, {
+        headers: getHeaders(),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching report categories:", error);
+      return { success: false, data: [] };
+    }
+  },
+
+  getStats: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/reports/stats`, {
+        headers: getHeaders(),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching report stats:", error);
+      return { success: false, data: null };
+    }
+  },
+
+  getOverTime: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/reports/over-time`, {
+        headers: getHeaders(),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching report over-time:", error);
+      return { success: false, data: [] };
     }
   },
 };

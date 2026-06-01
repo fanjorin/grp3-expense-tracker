@@ -86,10 +86,14 @@ Replacing placeholders in `app/page.js` (Dashboard) and `app/reports/`.
 - [x] Connect `EmailForm.jsx`, `OtpInput.jsx`, and `SignUpPage` to backend.
 - [x] Implement `authAPI` service in `services/api.js`.
 
-### Phase 3: Transaction CRUD & Budget (Current Priority)
-- Complete the `transactionAPI` in `services/api.js`.
-- Replace hardcoded budget values in `BudgetBanner.jsx`.
+### Phase 3: Transaction CRUD & Budget (Completed)
+- [x] Implement real Prisma-backed transaction and budget endpoints.
+- [x] Protect routes with JWT authentication middleware.
+- [x] Update `transactionAPI` and `budgetAPI` in `services/api.js`.
+- [x] Replace hardcoded budget values in `BudgetBanner.jsx`.
+- [x] Connect `ExpenseList.jsx` and `ExpenseForm.jsx` to real APIs.
 
-### Phase 4: Reports & Analytics
-- Implement dynamic charting data for `Charts.jsx`.
-- Implement comparative stats for `SummaryCards.jsx`.
+### Phase 4: Reports & Analytics (Completed)
+- [x] Implement dynamic charting data for `Charts.jsx`.
+- [x] Implement comparative stats for `SummaryCards.jsx`.
+- [x] Build the report category aggregation API.
