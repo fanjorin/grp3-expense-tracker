@@ -22,7 +22,7 @@ export default function Navbar() {
 
       {/* Nav Links */}
       <div className="flex gap-8">
-        <Link href="/" className="text-blue-600 font-semibold border-b-2 border-blue-600 text-sm">
+        <Link href="/dashboard" className="text-blue-600 font-semibold border-b-2 border-blue-600 text-sm">
           Dashboard
         </Link>
         <Link href="/reports" className="text-gray-500 hover:text-blue-600 text-sm transition-colors duration-200">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import FeatureCards from "./FeatureCards";
 
 export default function Hero() {
@@ -28,9 +29,9 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="flex flex-wrap items-center gap-4 mb-12">
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 hover:shadow-xl hover:scale-105 transition-all duration-200 shadow-lg shadow-blue-200">
+          <Link href="/signup" className="flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 hover:shadow-xl hover:scale-105 transition-all duration-200 shadow-lg shadow-blue-200">
             Start Free →
-          </button>
+          </Link>
           <button className="flex items-center gap-2 border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-full font-semibold hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200">
             ⊙ See How It Works
           </button>

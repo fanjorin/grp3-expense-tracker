@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Logo from "../../components/Logo";
+import Link from "next/link";
+import Logo from "./Logo";
 
 const navLinks = ["Features", "How It Works", "Pricing", "About Us", "Contact"];
 
@@ -35,12 +36,12 @@ export default function LandingNavbar() {
 
       {/* Buttons */}
       <div className="flex items-center gap-3">
-        <button className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">
+        <Link href="/login" className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">
           Log in
-        </button>
-        <button className="bg-blue-600 text-white text-sm px-5 py-2 rounded-full hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200">
+        </Link>
+        <Link href="/signup" className="bg-blue-600 text-white text-sm px-5 py-2 rounded-full hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200">
           Get Started Free
-        </button>
+        </Link>
       </div>
 
     </nav>

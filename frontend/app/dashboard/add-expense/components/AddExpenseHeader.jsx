@@ -1,10 +1,12 @@
+import Link from "next/link";
+
 export default function AddExpenseHeader() {
   return (
     <div className="flex items-center gap-3 mb-6">
       {/* Back Arrow */}
-      <a href="/dashboard" className="text-gray-500 hover:text-blue-600 text-xl">
+      <Link href="/dashboard" className="text-gray-500 hover:text-blue-600 text-xl">
         ←
-      </a>
+      </Link>
       <div>
         <h1 className="text-2xl font-bold text-gray-800">Add Expense</h1>
         <p className="text-gray-500 text-sm mt-1">

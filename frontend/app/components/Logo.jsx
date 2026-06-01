@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 export default function Logo({ textColor = "text-blue-600" }) {
   return (
-    <div className="flex items-center gap-2">
+    <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
 
       {/* Blue Square with Wallet Icon */}
       <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-md">
@@ -25,6 +27,6 @@ export default function Logo({ textColor = "text-blue-600" }) {
         Expense Tracker
       </span>
 
-    </div>
+    </Link>
   );
 }
