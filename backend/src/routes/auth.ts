@@ -2,9 +2,73 @@ import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { prisma } from '../lib/prisma';
+import { authenticate } from '../middleware/auth';
 
 const router = Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret';
+
+// Get current user profile
+router.get('/me', authenticate, async (req: Request, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        phoneNumber: true,
+        createdAt: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+
+    res.json({ success: true, data: user });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Update user profile
+router.patch('/profile', authenticate, async (req: Request, res: Response) => {
+  try {
+    const userId = req.user!.userId;
+    const { firstName, lastName, phone, email } = req.body;
+
+    // Check if email is being changed and if it's already taken
+    if (email) {
+      const existingUser = await prisma.user.findUnique({ where: { email } });
+      if (existingUser && existingUser.id !== userId) {
+        return res.status(400).json({ success: false, error: 'Email already in use' });
+      }
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        firstName,
+        lastName,
+        phoneNumber: phone,
+        email,
+      },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        phoneNumber: true,
+      },
+    });
+
+    res.json({ success: true, data: updatedUser });
+  } catch (error: any) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 // Signup Step 1: Basic Info
 router.post('/signup', async (req: Request, res: Response) => {

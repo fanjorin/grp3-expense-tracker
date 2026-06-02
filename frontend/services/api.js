@@ -63,6 +63,32 @@ export const authAPI = {
     });
     return await response.json();
   },
+
+  getProfile: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/me`, {
+        headers: getHeaders(),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+      return { success: false, error: "Failed to fetch profile" };
+    }
+  },
+
+  updateProfile: async (data) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+        method: "PATCH",
+        headers: getHeaders(),
+        body: JSON.stringify(data),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      return { success: false, error: "Failed to update profile" };
+    }
+  },
 };
 
 export const transactionAPI = {
