@@ -3,14 +3,14 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import Logo from "../../components/Logo";
-import { authAPI } from "../../../services/api";
+import Logo from "@/app/components/Logo";
+import { authAPI } from "@/services/api";
 
 function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get('email') || '';
-  const code = searchParams.get('code') || '';
+  const email = searchParams.get("email") || "";
+  const code = searchParams.get("code") || "";
 
   const [formData, setFormData] = useState({
     password: "",
@@ -44,17 +44,17 @@ function ResetPasswordContent() {
       const response = await authAPI.resetPassword({
         email,
         code,
-        newPassword: formData.password
+        newPassword: formData.password,
       });
 
       if (response.success) {
         alert("Password reset successfully. Please log in.");
-        router.push('/login');
+        router.push("/login");
       } else {
-        setError(response.error || 'Failed to reset password.');
+        setError(response.error || "Failed to reset password.");
       }
     } catch (err) {
-      setError('Connection error. Please try again later.');
+      setError("Connection error. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -65,15 +65,23 @@ function ResetPasswordContent() {
       {/* Sidebar */}
       <div className="hidden md:flex bg-blue-600 text-white w-72 flex-shrink-0 p-8 flex-col gap-5">
         <Logo textColor="text-white" />
-        <h1 className="text-2xl font-bold leading-snug">Create a strong new password</h1>
-        <p className="text-sm text-blue-200">Almost there! Just one last step and you'll be back in.</p>
+        <h1 className="text-2xl font-bold leading-snug">
+          Create a strong new password
+        </h1>
+        <p className="text-sm text-blue-200">
+          Almost there! Just one last step and you'll be back in.
+        </p>
       </div>
 
       {/* Main Content */}
       <div className="bg-white flex-1 p-10 flex flex-col justify-center">
         <div className="w-full max-w-md mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Reset Password</h2>
-          <p className="text-sm text-gray-500 mb-8 text-center">Enter a new password for {email}</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Reset Password
+          </h2>
+          <p className="text-sm text-gray-500 mb-8 text-center">
+            Enter a new password for {email}
+          </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
@@ -83,7 +91,9 @@ function ResetPasswordContent() {
             )}
 
             <div className="space-y-1">
-              <label className="text-sm font-medium text-gray-700">New Password</label>
+              <label className="text-sm font-medium text-gray-700">
+                New Password
+              </label>
               <div className="relative">
                 <input
                   name="password"
@@ -104,7 +114,9 @@ function ResetPasswordContent() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-sm font-medium text-gray-700">Confirm New Password</label>
+              <label className="text-sm font-medium text-gray-700">
+                Confirm New Password
+              </label>
               <input
                 name="confirmPassword"
                 type="password"

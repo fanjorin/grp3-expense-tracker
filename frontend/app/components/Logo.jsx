@@ -2,8 +2,10 @@ import Link from "next/link";
 
 export default function Logo({ textColor = "text-blue-600" }) {
   return (
-    <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-
+    <Link
+      href="/"
+      className="flex items-center gap-2 hover:opacity-90 transition-opacity"
+    >
       {/* Blue Square with Wallet Icon */}
       <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center shadow-md">
         <svg
@@ -24,9 +26,8 @@ export default function Logo({ textColor = "text-blue-600" }) {
 
       {/* Text */}
       <span className={`${textColor} font-bold text-lg tracking-tight`}>
-        Expense Tracker
+        PennyWise AI
       </span>
-
     </Link>
   );
 }
