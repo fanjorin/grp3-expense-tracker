@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { transactionAPI } from "../../services/api";
 
-export default function ActionBar() {
+export default function ActionBar({ onTransactionAdded }) {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
     type: "EXPENSE",
@@ -17,10 +17,15 @@ export default function ActionBar() {
       alert("Please fill in all fields");
       return;
     }
-    await transactionAPI.create({
+    const response = await transactionAPI.create({
       ...form,
       amount: Number(form.amount),
     });
+    if (!response?.success) {
+      alert("Failed to add transaction. Please try again.");
+      return;
+    }
+    onTransactionAdded?.(response.data);
     alert("Expense added!");
     setShowForm(false);
     setForm({

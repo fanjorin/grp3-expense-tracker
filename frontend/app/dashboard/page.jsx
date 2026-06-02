@@ -8,6 +8,7 @@ import ExpenseList from "../components/ExpenseList";
 
 export default function DashboardPage() {
   const [user, setUser] = useState(null);
+  const [addedTransaction, setAddedTransaction] = useState(null);
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -45,8 +46,8 @@ export default function DashboardPage() {
             Quick Actions & Transactions
           </h2>
         </div>
-        <ActionBar />
-        <ExpenseList />
+        <ActionBar onTransactionAdded={setAddedTransaction} />
+        <ExpenseList addedTransaction={addedTransaction} />
       </div>
     </div>
   );

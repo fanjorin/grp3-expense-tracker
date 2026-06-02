@@ -2,7 +2,13 @@
 import { useEffect, useState } from "react";
 import { transactionAPI } from "../../services/api";
 
-export default function ExpenseList() {
+function sortByDateDesc(transactions) {
+  return [...transactions].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+}
+
+export default function ExpenseList({ addedTransaction }) {
   const [expenses, setExpenses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -16,6 +22,14 @@ export default function ExpenseList() {
     };
     fetchExpenses();
   }, []);
+
+  useEffect(() => {
+    if (!addedTransaction) return;
+    setExpenses((prev) => {
+      if (prev.some((e) => e.id === addedTransaction.id)) return prev;
+      return sortByDateDesc([...prev, addedTransaction]);
+    });
+  }, [addedTransaction]);
 
   const handleDelete = async (id) => {
     const response = await transactionAPI.delete(id);
