@@ -8,11 +8,16 @@ const navLinks = ["Features", "How It Works", "Pricing", "About Us", "Contact"];
 
 export default function LandingNavbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem("token"));
   }, []);
 
   return (
@@ -36,12 +41,25 @@ export default function LandingNavbar() {
 
       {/* Buttons */}
       <div className="flex items-center gap-3">
-        <Link href="/login" className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">
-          Log in
-        </Link>
-        <Link href="/signup" className="bg-blue-600 text-white text-sm px-5 py-2 rounded-full hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200">
-          Get Started Free
-        </Link>
+        {isLoggedIn ? (
+          <>
+            <Link href="/dashboard/reports" className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">
+              Reports
+            </Link>
+            <Link href="/dashboard" className="bg-blue-600 text-white text-sm px-5 py-2 rounded-full hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200">
+              Dashboard
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href="/login" className="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">
+              Log in
+            </Link>
+            <Link href="/signup" className="bg-blue-600 text-white text-sm px-5 py-2 rounded-full hover:bg-blue-700 hover:shadow-lg hover:scale-105 transition-all duration-200">
+              Get Started Free
+            </Link>
+          </>
+        )}
       </div>
 
     </nav>
