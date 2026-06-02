@@ -176,18 +176,3 @@ http://localhost:3001
 
 This allows a frontend application running on that port to connect to the backend.
 
-# Important Note
-
-Transactions are currently stored in memory using an array.
-
-This means:
-* Data resets whenever the server restarts
-* No database is connected yet
-
-# Things to improve later
-
-* Add a database (MongoDB or PostgreSQL)
-* Add update functionality for transactions
-* Add authentication (login system)
-* Add validation for inputs
-* Deploy the backend
