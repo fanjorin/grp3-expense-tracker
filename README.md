@@ -176,3 +176,29 @@ http://localhost:3001
 
 This allows a frontend application running on that port to connect to the backend.
 
+## Database
+
+This project uses **Neon PostgreSQL**, a serverless PostgreSQL platform, as the primary database for storing expense and income records.
+
+### Features
+
+- Managed PostgreSQL database
+- Automatic scaling
+- Secure cloud-hosted storage
+- Connection pooling support
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+env
+DATABASE_URL="your_neon_database_connection_string"
+PORT=5000
+
+Configure your Neon PostgreSQL connection in .env.
+Run database migrations:
+npm install
+
+Start the server:
+npm run dev
+
