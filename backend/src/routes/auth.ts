@@ -115,12 +115,25 @@ router.post('/password/create', async (req: Request, res: Response) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await prisma.user.update({
+    const updatedUser = await prisma.user.update({
       where: { email },
       data: { password: hashedPassword },
     });
 
-    res.json({ success: true, message: 'Password set successfully' });
+    const token = jwt.sign({ userId: updatedUser.id }, JWT_SECRET, { expiresIn: '7d' });
+
+    res.json({
+      success: true,
+      data: {
+        token,
+        user: {
+          id: updatedUser.id,
+          email: updatedUser.email,
+          firstName: updatedUser.firstName,
+          lastName: updatedUser.lastName,
+        },
+      },
+    });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }

@@ -56,9 +56,9 @@ function SetPasswordContent() {
       });
 
       if (response.success) {
-        // Successfully set password, now move to step 3 (budget) or just login
-        // For now, let's just go to login or automatically log them in
-        router.push("/login");
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        router.push("/dashboard");
       } else {
         setError(response.error || "Failed to set password.");
       }
