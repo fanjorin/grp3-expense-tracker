@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { reportAPI } from "@/services/api";
 
 const ICON_MAP = {
-  "Food": "🍔",
-  "Transport": "🚌",
-  "Bills": "💡",
-  "Entertainment": "🎬",
-  "Housing": "🏠",
-  "Health": "🏥",
-  "Shopping": "🛍️",
-  "Others": "➕",
+  Food: "🍔",
+  Transport: "🚌",
+  Bills: "💡",
+  Entertainment: "🎬",
+  Housing: "🏠",
+  Health: "🏥",
+  Shopping: "🛍️",
+  Others: "➕",
 };
 
 const COLOR_MAP = [
@@ -34,14 +34,16 @@ export default function TopCategories() {
       try {
         const res = await reportAPI.getCategories();
         if (res?.success) {
-          const formatted = res.data.map((c, index) => ({
-            id: index + 1,
-            icon: ICON_MAP[c.name] || "💰",
-            name: c.name,
-            amount: `₦${c.amount.toLocaleString()}`,
-            percent: Math.round(c.percentage),
-            color: COLOR_MAP[index % COLOR_MAP.length]
-          })).sort((a, b) => b.percent - a.percent);
+          const formatted = res.data
+            .map((c, index) => ({
+              id: index + 1,
+              icon: ICON_MAP[c.name] || "💰",
+              name: c.name,
+              amount: `₦${c.amount.toLocaleString()}`,
+              percent: Math.round(c.percentage),
+              color: COLOR_MAP[index % COLOR_MAP.length],
+            }))
+            .sort((a, b) => b.percent - a.percent);
           setCategories(formatted);
         }
       } catch (error) {
@@ -54,14 +56,17 @@ export default function TopCategories() {
   }, []);
 
   if (isLoading) {
-    return <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-[400px]"></div>;
+    return (
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-[400px]"></div>
+    );
   }
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 h-full">
-
+    <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 h-full">
       <h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
-        <span className="p-1.5 bg-amber-50 rounded-lg text-amber-600 text-sm">🏆</span>
+        <span className="p-1.5 bg-amber-50 rounded-lg text-amber-600 text-sm">
+          🏆
+        </span>
         Top Categories
       </h3>
 
@@ -69,15 +74,20 @@ export default function TopCategories() {
         {categories.length > 0 ? (
           categories.map((cat) => (
             <div key={cat.id} className="group cursor-default">
-
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3 text-sm text-slate-700">
-                  <span className="text-xl group-hover:scale-110 transition-transform">{cat.icon}</span>
-                  <span className="font-semibold group-hover:text-slate-900 transition-colors">{cat.name}</span>
+                  <span className="text-xl group-hover:scale-110 transition-transform">
+                    {cat.icon}
+                  </span>
+                  <span className="font-semibold group-hover:text-slate-900 transition-colors">
+                    {cat.name}
+                  </span>
                 </div>
                 <div className="flex items-center gap-4 text-sm">
                   <span className="text-slate-900 font-bold">{cat.amount}</span>
-                  <span className="text-slate-400 w-8 text-right font-bold text-xs">{cat.percent}%</span>
+                  <span className="text-slate-400 w-8 text-right font-bold text-xs">
+                    {cat.percent}%
+                  </span>
                 </div>
               </div>
 
@@ -87,7 +97,6 @@ export default function TopCategories() {
                   style={{ width: `${cat.percent}%` }}
                 ></div>
               </div>
-
             </div>
           ))
         ) : (
@@ -97,7 +106,6 @@ export default function TopCategories() {
           </div>
         )}
       </div>
-
     </div>
   );
 }

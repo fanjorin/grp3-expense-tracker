@@ -25,7 +25,9 @@ export default function SummaryPanel() {
   }, []);
 
   if (isLoading) {
-    return <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-[400px]"></div>;
+    return (
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 animate-pulse h-[400px]"></div>
+    );
   }
 
   const income = stats?.current?.income || 0;
@@ -41,10 +43,11 @@ export default function SummaryPanel() {
   const savingsChange = stats?.changes?.income - stats?.changes?.expense;
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 h-full">
-
+    <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 h-full">
       <h3 className="font-bold text-slate-800 mb-6 flex items-center gap-2">
-        <span className="p-1.5 bg-purple-50 rounded-lg text-purple-600 text-sm">💰</span>
+        <span className="p-1.5 bg-purple-50 rounded-lg text-purple-600 text-sm">
+          💰
+        </span>
         Quick Summary
       </h3>
 
@@ -72,18 +75,30 @@ export default function SummaryPanel() {
 
         {/* Center Text */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <p className="text-2xl font-black text-slate-900 leading-none">₦{savings.toLocaleString()}</p>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Net Savings</p>
+          <p className="text-2xl font-black text-slate-900 leading-none">
+            ₦{savings.toLocaleString()}
+          </p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+            Net Savings
+          </p>
         </div>
       </div>
 
       {/* Legend */}
       <div className="flex flex-col gap-3">
         {data.map((entry, index) => (
-          <div key={index} className="flex items-center justify-between text-sm group cursor-default">
+          <div
+            key={index}
+            className="flex items-center justify-between text-sm group cursor-default"
+          >
             <div className="flex items-center gap-3">
-              <div className="w-2.5 h-2.5 rounded-full shadow-sm" style={{ backgroundColor: entry.color }}></div>
-              <span className="text-slate-500 font-medium group-hover:text-slate-900 transition-colors">{entry.name}</span>
+              <div
+                className="w-2.5 h-2.5 rounded-full shadow-sm"
+                style={{ backgroundColor: entry.color }}
+              ></div>
+              <span className="text-slate-500 font-medium group-hover:text-slate-900 transition-colors">
+                {entry.name}
+              </span>
             </div>
             <span className="font-bold text-slate-800">
               ₦{entry.value.toLocaleString()}
@@ -95,20 +110,23 @@ export default function SummaryPanel() {
       {/* Message */}
       {savings > 0 && (
         <div className="flex items-start gap-3 bg-slate-50 rounded-2xl p-4 mt-8 border border-slate-100 group transition-colors hover:bg-green-50/50 hover:border-green-100">
-          <span className="text-xl group-hover:scale-110 transition-transform">🎯</span>
+          <span className="text-xl group-hover:scale-110 transition-transform">
+            🎯
+          </span>
           <div>
             <p className="text-xs font-bold text-slate-900 mb-0.5">
-              {savingsChange > 0 ? "Outstanding Progress!" : "Staying Consistent"}
+              {savingsChange > 0
+                ? "Outstanding Progress!"
+                : "Staying Consistent"}
             </p>
             <p className="text-[10px] text-slate-500 leading-relaxed font-medium">
-              {savingsChange > 0 
+              {savingsChange > 0
                 ? `Your net savings increased by ${Math.round(savingsChange)}% this month. Brilliant!`
                 : "Your savings are on track. Continue maintaining your financial discipline."}
             </p>
           </div>
         </div>
       )}
-
     </div>
   );
 }

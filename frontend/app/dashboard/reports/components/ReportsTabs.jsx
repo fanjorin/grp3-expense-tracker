@@ -1,9 +1,8 @@
 export default function ReportsTabs() {
   return (
-    <div className="flex items-center justify-between border-b border-slate-100">
-
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 gap-4">
       {/* Tabs */}
-      <div className="flex gap-8">
+      <div className="flex gap-6 sm:gap-8 overflow-x-auto scrollbar-hide pb-0.5">
         {[
           { label: "Overview", active: true },
           { label: "Spending", active: false },
@@ -13,7 +12,7 @@ export default function ReportsTabs() {
         ].map((tab) => (
           <button
             key={tab.label}
-            className={`text-xs font-black uppercase tracking-widest pb-4 transition-all relative ${
+            className={`text-[10px] sm:text-xs font-black uppercase tracking-widest pb-4 transition-all relative whitespace-nowrap ${
               tab.active
                 ? "text-blue-600"
                 : "text-slate-400 hover:text-slate-600"
@@ -28,11 +27,10 @@ export default function ReportsTabs() {
       </div>
 
       {/* Filter Dropdown */}
-      <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-lg px-3 py-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-100 transition-colors mb-3">
+      <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-lg px-3 py-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-100 transition-colors mb-3 w-fit">
         Filter: This Month
         <span className="text-slate-400">▾</span>
       </div>
-
     </div>
   );
 }

@@ -31,14 +31,14 @@ export default function BudgetBanner() {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300">
       {/* Top Row */}
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-2xl font-bold text-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+        <p className="text-lg sm:text-2xl font-bold text-slate-800">
           You've spent{" "}
           <span className="text-blue-600">₦{amountSpent.toLocaleString()}</span>{" "}
           this month
         </p>
         <span
-          className={`text-xs font-semibold px-3 py-1 rounded-full border ${amountLeft < 5000 ? "text-red-600 bg-red-50 border-red-100" : "text-slate-500 bg-slate-50 border-slate-200"}`}
+          className={`w-fit text-xs font-semibold px-3 py-1 rounded-full border ${amountLeft < 5000 ? "text-red-600 bg-red-50 border-red-100" : "text-slate-500 bg-slate-50 border-slate-200"}`}
         >
           ₦{amountLeft.toLocaleString()} left
         </span>

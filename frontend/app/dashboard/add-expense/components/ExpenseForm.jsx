@@ -43,24 +43,29 @@ export default function ExpenseForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 hover:shadow-md transition-shadow duration-300"
+      className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 sm:p-8 hover:shadow-md transition-shadow duration-300"
     >
-      <div className="flex items-center gap-3 mb-8">
-        <span className="p-2 bg-blue-50 rounded-xl text-blue-600 text-lg">💰</span>
+      <div className="flex items-center gap-3 mb-6 sm:mb-8">
+        <span className="p-2 bg-blue-50 rounded-xl text-blue-600 text-lg">
+          💰
+        </span>
         <div>
-          <h2 className="font-bold text-slate-900 text-lg leading-tight">Transaction Details</h2>
-          <p className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-0.5">Enter spending or income info</p>
+          <h2 className="font-bold text-slate-900 text-lg leading-tight">
+            Transaction Details
+          </h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-0.5">
+            Enter spending or income info
+          </p>
         </div>
       </div>
 
       {error && (
-        <div className="mb-8 p-4 bg-red-50 text-red-600 text-xs font-bold rounded-xl border border-red-100 animate-in fade-in slide-in-from-top-2">
+        <div className="mb-6 sm:mb-8 p-4 bg-red-50 text-red-600 text-xs font-bold rounded-xl border border-red-100 animate-in fade-in slide-in-from-top-2">
           ⚠️ {error}
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {/* Type Toggle */}
         <div className="md:col-span-2">
           <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 ml-1 block mb-3">
@@ -70,14 +75,14 @@ export default function ExpenseForm() {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, type: "EXPENSE" })}
-              className={`flex-1 sm:flex-none px-8 py-2.5 rounded-xl text-xs font-bold transition-all ${formData.type === "EXPENSE" ? "bg-white text-red-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+              className={`flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-xl text-xs font-bold transition-all ${formData.type === "EXPENSE" ? "bg-white text-red-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
             >
               EXPENSE
             </button>
             <button
               type="button"
               onClick={() => setFormData({ ...formData, type: "INCOME" })}
-              className={`flex-1 sm:flex-none px-8 py-2.5 rounded-xl text-xs font-bold transition-all ${formData.type === "INCOME" ? "bg-white text-green-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
+              className={`flex-1 sm:flex-none px-4 sm:px-8 py-2.5 rounded-xl text-xs font-bold transition-all ${formData.type === "INCOME" ? "bg-white text-green-600 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
             >
               INCOME
             </button>
@@ -106,7 +111,9 @@ export default function ExpenseForm() {
               <option>Savings</option>
               <option>Miscellaneous</option>
             </select>
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none group-hover:text-blue-500 transition-colors">▾</span>
+            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none group-hover:text-blue-500 transition-colors">
+              ▾
+            </span>
           </div>
         </div>
 
@@ -120,7 +127,9 @@ export default function ExpenseForm() {
             placeholder="0.00"
             required
             value={formData.amount}
-            onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, amount: e.target.value })
+            }
             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-800 font-bold outline-none focus:border-blue-500 focus:bg-white transition-all duration-200"
           />
         </div>
@@ -131,12 +140,16 @@ export default function ExpenseForm() {
             Date
           </label>
           <div className="relative group">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-blue-500 transition-colors">📅</span>
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-blue-500 transition-colors">
+              📅
+            </span>
             <input
               type="date"
               required
               value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
               className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3.5 text-sm text-slate-800 font-semibold outline-none focus:border-blue-500 focus:bg-white transition-all duration-200 cursor-pointer"
             />
           </div>
@@ -145,7 +158,10 @@ export default function ExpenseForm() {
         {/* Description */}
         <div className="flex flex-col gap-2">
           <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 ml-1">
-            Description <span className="text-slate-300 font-normal lowercase">(optional)</span>
+            Description{" "}
+            <span className="text-slate-300 font-normal lowercase">
+              (optional)
+            </span>
           </label>
           <input
             type="text"
@@ -157,7 +173,6 @@ export default function ExpenseForm() {
             className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-sm text-slate-800 font-medium outline-none focus:border-blue-500 focus:bg-white transition-all duration-200"
           />
         </div>
-
       </div>
 
       {/* Buttons */}
@@ -180,4 +195,3 @@ export default function ExpenseForm() {
     </form>
   );
 }
-

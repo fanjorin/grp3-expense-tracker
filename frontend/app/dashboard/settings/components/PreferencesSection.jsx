@@ -6,19 +6,23 @@ export default function PreferencesSection() {
   const [theme, setTheme] = useState("light");
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 hover:shadow-md transition-all duration-300">
-
+    <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 sm:p-8 hover:shadow-md transition-all duration-300">
       <div className="flex items-center gap-3 mb-8">
-        <span className="p-2 bg-indigo-50 rounded-xl text-indigo-600 text-lg">⚙️</span>
+        <span className="p-2 bg-indigo-50 rounded-xl text-indigo-600 text-lg">
+          ⚙️
+        </span>
         <div>
-          <h2 className="font-bold text-slate-900 text-lg leading-tight">System Preferences</h2>
-          <p className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-0.5">Customize your app experience</p>
+          <h2 className="font-bold text-slate-900 text-lg leading-tight">
+            System Preferences
+          </h2>
+          <p className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-0.5">
+            Customize your app experience
+          </p>
         </div>
       </div>
 
       {/* Dropdowns Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-
         {/* Currency */}
         <div className="flex flex-col gap-2">
           <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 ml-1">
@@ -55,7 +59,6 @@ export default function PreferencesSection() {
             <option>24 Hour</option>
           </select>
         </div>
-
       </div>
 
       {/* Theme Toggle */}
@@ -63,15 +66,15 @@ export default function PreferencesSection() {
         <label className="text-[10px] font-bold uppercase tracking-wider text-slate-500 ml-1 block mb-3">
           App Theme
         </label>
-        <div className="flex p-1 bg-slate-100 rounded-2xl w-fit">
-
+        <div className="flex p-1 bg-slate-100 rounded-2xl w-full sm:w-fit">
           {/* Light Button */}
           <button
             onClick={() => setTheme("light")}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all
-              ${theme === "light"
-                ? "bg-white text-blue-600 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
+            className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all
+              ${
+                theme === "light"
+                  ? "bg-white text-blue-600 shadow-sm"
+                  : "text-slate-500 hover:text-slate-700"
               }`}
           >
             ☀️ LIGHT
@@ -80,18 +83,17 @@ export default function PreferencesSection() {
           {/* Dark Button */}
           <button
             onClick={() => setTheme("dark")}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all
-              ${theme === "dark"
-                ? "bg-white text-blue-600 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
+            className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all
+              ${
+                theme === "dark"
+                  ? "bg-white text-blue-600 shadow-sm"
+                  : "text-slate-500 hover:text-slate-700"
               }`}
           >
             🌙 DARK
           </button>
-
         </div>
       </div>
-
     </div>
   );
 }
