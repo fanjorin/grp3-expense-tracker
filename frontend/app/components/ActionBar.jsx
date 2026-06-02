@@ -51,12 +51,12 @@ export default function ActionBar() {
           <input
             type="text"
             placeholder="Search transactions..."
-            className="w-full bg-white border border-slate-200 rounded-xl pl-11 pr-4 py-3 sm:py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/5 transition"
+            className="w-full text-slate-900 bg-white border border-slate-200 rounded-xl pl-11 pr-4 py-3 sm:py-2.5 text-sm outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/5 transition"
           />
         </div>
 
         <div className="flex gap-3 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide">
-          <select className="bg-white border border-slate-200 rounded-xl px-4 py-3 sm:py-2.5 text-sm outline-none cursor-pointer focus:border-blue-500 transition text-slate-600 min-w-[140px]">
+          <select className="bg-white border border-slate-200 rounded-xl px-4 py-3 sm:py-2.5 text-sm outline-none cursor-pointer focus:border-blue-500 transition text-slate-900 min-w-[140px]">
             <option>All Categories</option>
             <option>Food</option>
             <option>Clothing</option>
@@ -114,7 +114,7 @@ export default function ActionBar() {
                 placeholder="0.00"
                 value={form.amount}
                 onChange={(e) => setForm({ ...form, amount: e.target.value })}
-                className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition"
+                className="w-full p-3.5 text-slate-900 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold outline-none focus:border-blue-500 focus:bg-white transition"
               />
             </div>
 
@@ -146,7 +146,7 @@ export default function ActionBar() {
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-blue-500 focus:bg-white transition cursor-pointer"
+                className="w-full p-3.5 text-slate-900 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-blue-500 focus:bg-white transition cursor-pointer"
               />
             </div>
 
@@ -161,7 +161,7 @@ export default function ActionBar() {
                 onChange={(e) =>
                   setForm({ ...form, description: e.target.value })
                 }
-                className="w-full p-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-blue-500 focus:bg-white transition"
+                className="w-full p-3.5 text-slate-900 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-blue-500 focus:bg-white transition"
               />
             </div>
 
