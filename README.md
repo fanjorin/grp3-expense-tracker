@@ -191,3 +191,46 @@ This means:
 * Add authentication (login system)
 * Add validation for inputs
 * Deploy the backend
+
+## Design Contributions
+
+This project's user interface and user experience design were developed in Figma.
+
+### Responsibilities
+
+- Designed the complete Expense Tracker interface
+- Created user flows for:
+  - Authentication
+  - Expense Logging
+  - Dashboard Navigation
+- Established visual hierarchy and layout system
+- Defined typography and spacing system
+- Collaborated with frontend developers during implementation
+
+### Design Tools
+
+- Figma
+- FigJam
+- Google Slides
+
+### Design Challenges
+
+One major challenge was maintaining font consistency between Figma and implementation.
+
+Different devices rendered fonts differently, causing inconsistencies between the designed mockups and the final application.
+
+To solve this:
+
+- Standardized font families
+- Documented font weights
+- Shared implementation guidelines with developers
+
+### Design Assets
+
+Link to Figma:
+
+Figma file: https://www.figma.com/design/6AJDAmmEChynQteO3UsWJB/Expense-Tracker?node-id=0-1&t=Fk8fluAKSZqYxEs5-1
+
+ Prototype link: https://www.figma.com/proto/6AJDAmmEChynQteO3UsWJB/Expense-Tracker?node-id=0-1&t=Fk8fluAKSZqYxEs5-1
+
+ Dev mode: https://www.figma.com/design/6AJDAmmEChynQteO3UsWJB/Expense-Tracker?node-id=0-1&m=dev&t=Fk8fluAKSZqYxEs5-1
